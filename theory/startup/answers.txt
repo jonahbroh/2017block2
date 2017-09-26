@@ -1,0 +1,5 @@
+1. Moore's Law states that the number of transistors on a CPU will double every two years, which results in a major increase in CPU ability.
+2. Clock speed measures the frequency of one of a CPU's cores; it can be an effective measure of speed, but a multi-core CPU running at 500 Mhz could outperform a single-core CPU running at 1 Ghz.
+3. FLOPS can be an effective measure when attempting to model something or otherwise run a large quantity of floating point operations, but can be increased without necessarily improving overall performance.
+   Clock speed can be used as a measure of overall performance, but a higher number of cores tends to come with much less heat output than a high clock speed.
+   Instructions per second can also be used to measure performance, but like FLOPS can be bottlenecked.
