@@ -1,4 +1,4 @@
-1.
-2.
+1. Race conditions occur when the nondeterministic order of parallel processes causes incorrect results, and can be detected by looking at which parallel processes are accessing the same memory locations. Deadlocks occur when multiple processes stall because they have contradictory lock access, and can be detected by paying attention to lock order. Strangled scaling occurs when a lock bottlenecks the program, and can be detected by looking at what needs to access locks when.
+2. Load imbalance occurs when some cores are given more work than others, leading to some cores idling while others work. It complicates performance reasoning because load imbalance results in an efficiency decrease.
 3. Some threads are in the array more than once, some aren't at all.
 4. The program would stall forever.
