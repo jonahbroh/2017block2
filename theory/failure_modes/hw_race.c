@@ -10,14 +10,15 @@ int main(int argc, char** argv) {
         t_hello[i]=-1;
     }
     i=0;
+    printf("%d\n", i);
     #pragma omp parallel num_threads(8)
     {
           t_hello[i]=omp_get_thread_num();
           i++;
           printf("%d\n", i);
           while (i < T){
-            sleep(1);
             printf("%d\n", i);
+            sleep(1);
           }
     }
 
