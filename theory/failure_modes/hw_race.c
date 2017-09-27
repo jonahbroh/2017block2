@@ -1,5 +1,6 @@
 #include <omp.h>
 #include <stdio.h>
+#include <unistd.h>
 
 int main(int argc, char** argv) {
     size_t T=8;
