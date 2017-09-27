@@ -1,5 +1,6 @@
 #include <omp.h>
 #include <stdio.h>
+omp_lock_t lockA;
 
 int main(int argc, char** argv) {
     size_t T=8;
