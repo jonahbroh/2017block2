@@ -13,9 +13,8 @@ int main(int argc, char** argv) {
     {
           t_hello[i]=omp_get_thread_num();
           i++;
-          printf("%d\n", i);
           while (i+1 < T){
-
+            printf("%d\n", i);
           }
     }
 
