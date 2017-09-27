@@ -14,7 +14,7 @@ int main(int argc, char** argv) {
           t_hello[i]=omp_get_thread_num();
           i++;
           while (i+1 < T){
-            sleep(1)
+            sleep(1);
             printf("%d\n", i);
           }
     }
