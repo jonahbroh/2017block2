@@ -1,4 +1,0 @@
-1.
-2.
-3. Some threads are in the array more than once, some aren't at all.
-4. The program would stall forever.
