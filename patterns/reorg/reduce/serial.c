@@ -41,10 +41,10 @@ void place_uniformly(int sx, int ex, int sy, int ey, int sz, int ez, struct volu
   printf("place_uniformly\n");
   int total = 0;
   struct phaseball* n = malloc(sizeof(struct phaseball));
-  n->x = malloc(sizeof(float[(ex-sx)*(ey-sy)*(ez-sz)]));
-  n->y = malloc(sizeof(float[(ex-sx)*(ey-sy)*(ez-sz)]));
-  n->z = malloc(sizeof(float[(ex-sx)*(ey-sy)*(ez-sz)]));
-  n->mass = malloc(sizeof(float[(ex-sx)*(ey-sy)*(ez-sz)]));
+  n->x = malloc(sizeof(double[(ex-sx)*(ey-sy)*(ez-sz)]));
+  n->y = malloc(sizeof(double[(ex-sx)*(ey-sy)*(ez-sz)]));
+  n->z = malloc(sizeof(double[(ex-sx)*(ey-sy)*(ez-sz)]));
+  n->mass = malloc(sizeof(double[(ex-sx)*(ey-sy)*(ez-sz)]));
     for(int i=sx; i<=ex; i++) {
         for(int j=sy; j<=ey; j++) {
             for(int k=sz; k<=ez; k++) {
