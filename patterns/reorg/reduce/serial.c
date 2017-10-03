@@ -8,13 +8,6 @@
 #include <time.h>
 
 /* struct to hold objects attributes */
-struct phaseball {
-    struct** phaseballx x;
-    struct** phasebally y;
-    struct** phaseballz z;
-    struct** phaseballmass mass;
-};
-
 struct phaseballx{
     float* x;
 };
@@ -29,6 +22,13 @@ struct phaseballz{
 
 struct phaseballmass{
     float* mass;
+};
+
+struct phaseball {
+    struct phaseballx** x;
+    struct phasebally** y;
+    struct phaseballz** z;
+    struct phaseballmass** mass;
 };
 
 struct volume {
@@ -55,7 +55,7 @@ void volume_append(struct volume* v, struct phaseball* o, int total) {
 void place_uniformly(int sx, int ex, int sy, int ey, int sz, int ez, struct volume* v) {
   int total = 0;
   struct phaseball* n = malloc(sizeof(struct phaseball));
-  (n->x) = malloc(sizeof(struct phaseballx[(ex-sx)*(ey-sy)*(ez-sz)]));
+  n->x = malloc(sizeof(struct phaseballx[(ex-sx)*(ey-sy)*(ez-sz)]));
   n->y = malloc(sizeof(struct phasebally[(ex-sx)*(ey-sy)*(ez-sz)]));
   n->z = malloc(sizeof(struct phaseballz[(ex-sx)*(ey-sy)*(ez-sz)]));
   n->mass = malloc(sizeof(struct phaseballmass[(ex-sx)*(ey-sy)*(ez-sz)]));
