@@ -9,10 +9,10 @@
 
 /* struct to hold objects attributes */
 struct phaseball {
-    float** x;
-    float** y;
-    float** z;
-    float** mass;
+    float* x;
+    float* y;
+    float* z;
+    float* mass;
 };
 
 struct volume {
