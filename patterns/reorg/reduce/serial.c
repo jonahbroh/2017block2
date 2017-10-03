@@ -9,11 +9,27 @@
 
 /* struct to hold objects attributes */
 struct phaseball {
-    float* x;
-    float* y;
-    float* z;
-    float* mass;
+    struct** phaseballx x;
+    struct** phasebally y;
+    struct** phaseballz z;
+    struct** phaseballmass mass;
 };
+
+struct phaseballx{
+    float* x;
+}
+
+struct phasebally{
+    float* y;
+}
+
+struct phaseballz{
+    float* z;
+}
+
+struct phaseballmass{
+    float* mass;
+}
 
 struct volume {
     size_t size;
@@ -39,18 +55,17 @@ void volume_append(struct volume* v, struct phaseball* o, int total) {
 void place_uniformly(int sx, int ex, int sy, int ey, int sz, int ez, struct volume* v) {
   int total = 0;
   struct phaseball* n = malloc(sizeof(struct phaseball));
-  n->x[(ex-sx)*(ey-sy)*(ez-sz)];
-  n->y[(ex-sx)*(ey-sy)*(ez-sz)];
-  n->z[(ex-sx)*(ey-sy)*(ez-sz)];
-  n->mass[(ex-sx)*(ey-sy)*(ez-sz)];
+  n->x = malloc(sizeof(struct phaseballx[(ex-sx)*(ey-sy)*(ez-sz)]));
+  n->y = malloc(sizeof(struct phasebally[(ex-sx)*(ey-sy)*(ez-sz)]));
+  n->z = malloc(sizeof(struct phaseballz[(ex-sx)*(ey-sy)*(ez-sz)]));
+  n->mass = malloc(sizeof(struct phaseballmass[(ex-sx)*(ey-sy)*(ez-sz)]));
     for(int i=sx; i<=ex; i++) {
         for(int j=sy; j<=ey; j++) {
             for(int k=sz; k<=ez; k++) {
-                n->x[total] = i;
-                n->y[total] = j;
-                n->z[total] = k;
-                n->mass[total] = 1;
-                n->mass[total] = fabs(n->x[total])+fabs(n->y[total])+fabs(n->z[total]);
+                n->x[total]->x = i;
+                n->y[total]->y = j;
+                n->z[total]->z = k;
+                n->mass[total]->mass = fabs(n->x[total]->x)+fabs(n->y[total]->y)+fabs(n->z[total]->z);
                 total += 1;
             }
         }
@@ -65,9 +80,9 @@ void post_process(struct volume* v, float* cx, float* cy) {
     double wy=0.0;
     struct phaseball* o = v->objects;
     for(int i=0; i<v->last; i++) {
-        mass_sum += o->mass[i];
-        wx += o->x[i] * o->mass[i];
-        wy += o->y[i] * o->mass[i];
+        mass_sum += o->mass[i]->mass;
+        wx += o->x[i]->x * o->mass[i]->mass;
+        wy += o->y[i]->y * o->mass[i]->mass;
     }
     *cx = wx/mass_sum;
     *cy = wy/mass_sum;
