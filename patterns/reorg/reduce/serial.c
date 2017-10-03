@@ -41,8 +41,8 @@ void place_uniformly(int sx, int ex, int sy, int ey, int sz, int ez, struct volu
   struct phaseball* n = malloc(sizeof(struct phaseball));
   n->x[(ex-sx)*(ey-sy)*(ez-sz)];
   n->y[(ex-sx)*(ey-sy)*(ez-sz)];
-  n->z[(ex-sx)*(ey-sy)*(ez-sz)]
-  n->mass[(ex-sx)*(ey-sy)*(ez-sz)]
+  n->z[(ex-sx)*(ey-sy)*(ez-sz)];
+  n->mass[(ex-sx)*(ey-sy)*(ez-sz)];
     for(int i=sx; i<=ex; i++) {
         for(int j=sy; j<=ey; j++) {
             for(int k=sz; k<=ez; k++) {
