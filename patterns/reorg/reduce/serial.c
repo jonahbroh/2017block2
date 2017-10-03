@@ -53,6 +53,9 @@ void place_uniformly(int sx, int ex, int sy, int ey, int sz, int ez, struct volu
                 n->mass[total] = 1;
                 n->mass[total] = fabs(n->x[total])+fabs(n->y[total])+fabs(n->z[total]);
                 total += 1;
+                if(total%1000 == 1){
+                  printf("here\n");
+                }
             }
         }
     }
