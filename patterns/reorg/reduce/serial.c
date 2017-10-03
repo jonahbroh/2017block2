@@ -9,10 +9,10 @@
 
 /* struct to hold objects attributes */
 struct phaseball {
-    float** x;
-    float** y;
-    float** z;
-    float** mass;
+    float* x;
+    float* y;
+    float* z;
+    float* mass;
 };
 
 struct volume {
@@ -24,7 +24,7 @@ struct volume {
 // Add phaseball to a volume
 void volume_append(struct volume* v, struct phaseball* o, int total) {
     (v->objects) = o;
-    (v->size) = total;
+    (v->size) = total*100;
     (v->last) = total+1;
     // if( v->last == v->size ) {
     //     (v->size) += 100;
