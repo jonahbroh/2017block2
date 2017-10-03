@@ -37,6 +37,7 @@ void volume_append(struct volume* v, struct phaseball* o, int total) {
 
 // Place phaseballs uniformly in a box, with mass equal to the manhattan distance
 void place_uniformly(int sx, int ex, int sy, int ey, int sz, int ez, struct volume* v) {
+  printf("place_uniformly\n");
   int total = 0;
   struct phaseball* n = malloc(sizeof(struct phaseball));
   n->x = malloc(sizeof(float[(ex-sx)*(ey-sy)*(ez-sz)]));
@@ -60,6 +61,7 @@ void place_uniformly(int sx, int ex, int sy, int ey, int sz, int ez, struct volu
 
 // Projects 3D volume to 11x11 2D map and report centroid
 void post_process(struct volume* v, float* cx, float* cy) {
+    printf("post_process\n");
     double mass_sum=0.0;
     double wx=0.0;
     double wy=0.0;
