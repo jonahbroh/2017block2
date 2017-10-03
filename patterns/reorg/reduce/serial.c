@@ -23,6 +23,7 @@ struct volume {
 
 // Add phaseball to a volume
 void volume_append(struct volume* v, struct phaseball* o, int total) {
+    printf("volume_append\n");
     (v->objects) = o;
     (v->size) = total*100;
     (v->last) = total+1;
@@ -53,9 +54,6 @@ void place_uniformly(int sx, int ex, int sy, int ey, int sz, int ez, struct volu
                 n->mass[total] = 1;
                 n->mass[total] = fabs(n->x[total])+fabs(n->y[total])+fabs(n->z[total]);
                 total += 1;
-                if(total%1000 == 1){
-                  printf("here\n");
-                }
             }
         }
     }
