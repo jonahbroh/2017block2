@@ -16,7 +16,6 @@ struct phaseball {
 };
 
 struct volume {
-    size_t size;
     size_t last;
     struct phaseball* objects;
 };
@@ -25,7 +24,6 @@ struct volume {
 void volume_append(struct volume* v, struct phaseball* o, int total) {
     printf("volume_append\n");
     (v->objects) = o;
-    (v->size) = total*100;
     (v->last) = total+1;
     // if( v->last == v->size ) {
     //     (v->size) += 100;
