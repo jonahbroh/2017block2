@@ -79,7 +79,6 @@ void post_process(struct volume* v, float* cx, float* cy) {
 int main(int argc, char** argv) {
     // make a volume to store objects in
     struct volume v;
-    v.size=100;
     v.last=0;
     v.objects = malloc(sizeof(struct phaseball*)*100);
 
