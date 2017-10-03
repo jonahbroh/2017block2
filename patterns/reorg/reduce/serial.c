@@ -17,19 +17,19 @@ struct phaseball {
 
 struct phaseballx{
     float* x;
-}
+};
 
 struct phasebally{
     float* y;
-}
+};
 
 struct phaseballz{
     float* z;
-}
+};
 
 struct phaseballmass{
     float* mass;
-}
+};
 
 struct volume {
     size_t size;
