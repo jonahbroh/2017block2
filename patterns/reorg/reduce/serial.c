@@ -9,19 +9,19 @@
 
 /* struct to hold objects attributes */
 struct phaseballx{
-    float* x;
+    float x;
 };
 
 struct phasebally{
-    float* y;
+    float y;
 };
 
 struct phaseballz{
-    float* z;
+    float z;
 };
 
 struct phaseballmass{
-    float* mass;
+    float mass;
 };
 
 struct phaseball {
