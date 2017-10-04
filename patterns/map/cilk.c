@@ -80,7 +80,7 @@ int main(int argc, char** argv) {
       genpass(currpass,passmatch);
       // check for a match
       notfound=test(argv[1], passmatch);
-      if(i == 12345678){
+      if(currpass == 12345678){
         printf("??\n");
         printf("%s\n",passmatch);
         printf("%s\n",notfound);
