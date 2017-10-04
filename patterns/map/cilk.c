@@ -73,14 +73,15 @@ int main(int argc, char** argv) {
     clock_gettime(CLOCK_MONOTONIC,&start_time);
     // While a match has not been found, search
     int notfound=1;
-      cilk_for(int i = 0; i<99999999; i++){
-        if(notfound){
-          // generate the password
-          genpass(i,passmatch);
-          // check for a match
-          notfound=test(argv[1], passmatch);
-        }
+    cilk_for(int i = 0; i<99999999; i++){
+      if(notfound){
+        // generate the password
+        genpass(currpass,passmatch);
+        // check for a match
+        notfound=test(argv[1], passmatch);
+        currpass++;
       }
+    }
     clock_gettime(CLOCK_MONOTONIC,&end_time);
 
     // convert the time to elapsed milliseconds
