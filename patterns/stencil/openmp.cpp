@@ -104,7 +104,7 @@ void apply_stencil(const int radius, const double stddev, const int rows, const 
     else{
       for(int i = 0; i < dim-3; i++){
         prewittX_kernel(i, i+2, kernel);
-        prewittY_kernel(i, i_2, kernel2);
+        prewittY_kernel(i, i+2, kernel2);
       }
     }
     // For each pixel in the image...
