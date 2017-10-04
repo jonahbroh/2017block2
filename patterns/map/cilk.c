@@ -59,7 +59,7 @@ void genpass(long passnum, char* passbuff) {
 int gentest(int currpass, char* passmatch, char* param, char* finalpass){
   genpass(currpass, passmatch);
   int notfound=test(param,passmatch);
-  if (curpass == 12345678){
+  if (currpass == 12345678){
     printf("???");
     printf(param,"\n");
     printf(passmatch,"\n");
