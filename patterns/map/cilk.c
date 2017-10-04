@@ -90,7 +90,7 @@ int main(int argc, char** argv) {
 
       }
       else{
-        genpass(i, finalpass)
+        genpass(i, finalpass);
       }
     }
     clock_gettime(CLOCK_MONOTONIC,&end_time);
