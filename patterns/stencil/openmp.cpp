@@ -107,7 +107,7 @@ void apply_stencil(const int radius, const double stddev, const int rows, const 
             for(int x = i - radius, kx = 0; x <= i + radius; ++x, ++kx) {
                 for(int y = j - radius, ky = 0; y <= j + radius; ++y, ++ky) {
                     // ...and skip parts of the template outside of the image
-                    #pragma omp task depend(in:in) depend(out:out)
+                    // #pragma omp task depend(in:in) depend(out:out)
                     if(x >= 0 && x < rows && y >= 0 && y < cols) {
                         // Acculate intensities in the output pixel
                         const int in_offset = x + (y*rows);
