@@ -79,7 +79,7 @@ int main(int argc, char** argv) {
       genpass(currpass,passmatch);
       // check for a match
       notfound=test(argv[1], passmatch);
-      if(notfound){
+      if(!notfound){
         printf(passmatch);
         finalpass = passmatch;
       }
