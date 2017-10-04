@@ -76,14 +76,13 @@ int main(int argc, char** argv) {
     int notfound=1;
     cilk_for(int i = 0; i<99999999; i++){
       // generate the password
-      genpass(currpass,passmatch);
+      genpass(i,passmatch);
       // check for a match
       notfound=test(argv[1], passmatch);
       if(notfound == 0){
         printf("!!!\n");
-        genpass(currpass,finalpass);
+        genpass(i,finalpass);
       }
-      currpass++;
     }
     clock_gettime(CLOCK_MONOTONIC,&end_time);
 
