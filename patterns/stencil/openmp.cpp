@@ -102,8 +102,10 @@ void apply_stencil(const int radius, const double stddev, const int rows, const 
       gaussian_kernel(dim, dim, stddev, kernel);
     }
     else{
-      prewittX_kernel(dim, dim, kernel);
-      prewittY_kernel(dim, dim, kernel2);
+      for(int i = 0; i < dim-3; i++){
+        prewittX_kernel(i, i+2, kernel);
+        prewittY_kernel(i, i_2, kernel2);
+      }
     }
     // For each pixel in the image...
     #pragma omp parallel for
