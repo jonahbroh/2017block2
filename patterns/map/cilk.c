@@ -86,7 +86,8 @@ int main(int argc, char** argv) {
     int notfound=1;
     cilk_for(int i = 0; i<99999999; i++){
       // generate the password
-      if (cilk_spawn gentest(i, passmatch, argv[1]) < 0){
+      currpass = cilk_spawn gentest(i, passmatch, argv[1]);
+      if (currpass < 0){
 
       }
       else{
