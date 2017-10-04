@@ -55,7 +55,7 @@ void place_uniformly(int sx, int ex, int sy, int ey, int sz, int ez, struct volu
             }
         }
     }
-    volume_append(v,n,total);
+  volume_append(v,n,total);
 }
 
 // Projects 3D volume to 11x11 2D map and report centroid
@@ -65,11 +65,12 @@ void post_process(struct volume* v, float* cx, float* cy) {
     double wx=0.0;
     double wy=0.0;
     struct phaseball* o = v->objects;
-    for(int i=0; i<v->last; i++) {
-        mass_sum += o->mass[i];
-        wx += o->x[i] * o->mass[i];
-        wy += o->y[i] * o->mass[i];
-    }
+    #pragma omp parallel for reduction(+:wx,wy,mas_sum)
+      for(int i=0; i<v->last; i++) {
+          mass_sum += o->mass[i];
+          wx += o->x[i] * o->mass[i];
+          wy += o->y[i] * o->mass[i];
+      }
     *cx = wx/mass_sum;
     *cy = wy/mass_sum;
 
