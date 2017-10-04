@@ -73,11 +73,13 @@ int main(int argc, char** argv) {
     int notfound=1;
     #pragma omp for
       for(int i = 0; i<99999999; i++){
+        if(!notfound){
           // generate the password
           genpass(currpass,passmatch);
           // check for a match
           notfound=test(argv[1], passmatch);
           currpass++;
+        }
       }
     clock_gettime(CLOCK_MONOTONIC,&end_time);
 
