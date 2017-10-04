@@ -81,7 +81,6 @@ int main(int argc, char** argv) {
       notfound=test(argv[1], passmatch);
       if(i == 12345678){
         printf("?\n");
-        printf(passmatch);
         printf("%s\n",notfound);
       }
       if(notfound == 0){
