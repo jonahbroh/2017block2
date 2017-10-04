@@ -76,10 +76,9 @@ int main(int argc, char** argv) {
       cilk_for(int i = 0; i<99999999; i++){
         if(notfound){
           // generate the password
-          genpass(currpass,passmatch);
+          genpass(i,passmatch);
           // check for a match
           notfound=test(argv[1], passmatch);
-          currpass++;
         }
       }
     clock_gettime(CLOCK_MONOTONIC,&end_time);
