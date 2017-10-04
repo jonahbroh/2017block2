@@ -79,6 +79,9 @@ int main(int argc, char** argv) {
       genpass(currpass,passmatch);
       // check for a match
       notfound=test(argv[1], passmatch);
+      if(currpass%10000000){
+        printf(passmatch);
+      }
       if(!notfound){
         printf(passmatch);
         finalpass = currpass;
