@@ -56,9 +56,9 @@ void genpass(long passnum, char* passbuff) {
     }
 }
 
-int gentest(int currpass, char* passmatch){
+int gentest(int currpass, char* passmatch, char* param){
   genpass(currpass, passmatch);
-  if (test(argv[i],passmatch) == 0){
+  if (test(param,passmatch) == 0){
     return currpass;
   }
   else{
@@ -86,7 +86,7 @@ int main(int argc, char** argv) {
     int notfound=1;
     cilk_for(int i = 0; i<99999999; i++){
       // generate the password
-      if (gentest(i, passmatch) < 0){
+      if (gentest(i, passmatch, argv[1]) < 0){
 
       }
       else{
