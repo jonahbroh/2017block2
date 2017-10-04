@@ -88,7 +88,6 @@ int main(int argc, char** argv) {
     cilk_for(int i = 0; i<99999999; i++){
       // generate the password
       if (gentest(i, passmatch, argv[1]) < 0){
-        printf("?\n");
       }
       else{
         printf("!\n");
