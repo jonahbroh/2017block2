@@ -81,7 +81,7 @@ int main(int argc, char** argv) {
       notfound=test(argv[1], passmatch);
       if(notfound == 0){
         printf(passmatch);
-        finalpass = currpass;
+        finalpass = passmatch;
       }
       currpass++;
     }
