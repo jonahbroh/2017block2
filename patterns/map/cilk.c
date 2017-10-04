@@ -87,11 +87,7 @@ int main(int argc, char** argv) {
     int notfound=1;
     cilk_for(int i = 0; i<99999999; i++){
       // generate the password
-      if (gentest(i, passmatch, argv[1], finalpass) < 0){
-      }
-      else{
-        printf("!\n");
-      }
+      gentest(i, passmatch, argv[1], finalpass);
     }
     clock_gettime(CLOCK_MONOTONIC,&end_time);
 
