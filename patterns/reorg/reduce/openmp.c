@@ -65,7 +65,7 @@ void post_process(struct volume* v, float* cx, float* cy) {
     double wx=0.0;
     double wy=0.0;
     struct phaseball* o = v->objects;
-    #pragma omp parallel for reduction(+:wx,wy,mas_sum)
+    #pragma omp parallel for reduction(+:wx,wy,mass_sum)
       for(int i=0; i<v->last; i++) {
           mass_sum += o->mass[i];
           wx += o->x[i] * o->mass[i];
