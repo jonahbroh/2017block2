@@ -107,14 +107,14 @@ void apply_stencil(const int radius, const double stddev, const int rows, const 
             for(int x = i - radius, kx = 0; x <= i + radius; ++x, ++kx) {
                 for(int y = j - radius, ky = 0; y <= j + radius; ++y, ++ky) {
                     // ...and skip parts of the template outside of the image
-                    #pragma omp task depend(in:in[in_offset]) depend(out:out[out_offset])
                     if(x >= 0 && x < rows && y >= 0 && y < cols) {
                         // Acculate intensities in the output pixel
                         const int in_offset = x + (y*rows);
                         const int k_offset = kx + (ky*dim);
-                        out[out_offset].red   += kernel[k_offset] * in[in_offset].red;
-                        out[out_offset].green += kernel[k_offset] * in[in_offset].green;
-                        out[out_offset].blue  += kernel[k_offset] * in[in_offset].blue;
+                        #pragma omp task depend(in:in[in_offset].red,in[in_offset].green,in[in_offset].blue) depend(out:out[out_offset].red,out[out_offset].green,out[out_offset].blue)
+                          out[out_offset].red   += kernel[k_offset] * in[in_offset].red;
+                          out[out_offset].green += kernel[k_offset] * in[in_offset].green;
+                          out[out_offset].blue  += kernel[k_offset] * in[in_offset].blue;
                     }
                 }
             }
