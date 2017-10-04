@@ -22,6 +22,8 @@
 // valid pin characters
 const char* chars="0123456789";
 
+pthread_mutex_t m;
+
 // tests if a hash matches a candidate password
 int test(const char* passhash, const char* passcandidate) {
     unsigned char digest[MD5_DIGEST_LENGTH]; // hash storage
@@ -57,19 +59,13 @@ void genpass(long passnum, char* passbuff) {
 }
 
 int gentest(int currpass, char* passmatch, char* param, char* finalpass){
+  pthread_mutex_lock(&m);
   genpass(currpass, passmatch);
   int notfound=test(param,passmatch);
-  if (currpass == 12345678){
-    printf("???");
-    printf(param,"\n");
-    printf(passmatch,"\n");
-    printf("%d\n",currpass);
-    printf("%d\n",notfound);
-  }
+  pthread_mutex_unlock(&m);
   if (notfound == 0){
     printf("!!!");
-    printf(param,"\n");
-    printf(passmatch,"\n");
+    printf(passmatch);
     printf("%d\n",currpass);
     genpass(currpass, finalpass);
     return currpass;
