@@ -56,6 +56,16 @@ void genpass(long passnum, char* passbuff) {
     }
 }
 
+int gentest(int currpass, char* passmatch){
+  genpass(currpass, passmatch);
+  if (test(argv[i],passmatch) == 0){
+    return currpass;
+  }
+  else{
+    return -1;
+  }
+}
+
 int main(int argc, char** argv) {
     if(argc != 2) {
         printf("Usage: %s <password hash>\n",argv[0]);
@@ -76,18 +86,11 @@ int main(int argc, char** argv) {
     int notfound=1;
     cilk_for(int i = 0; i<99999999; i++){
       // generate the password
-      currpass = i;
-      genpass(currpass,passmatch);
-      // check for a match
-      notfound=test(argv[1], passmatch);
-      if(currpass == 12345678){
-        printf("??\n");
-        printf("%s\n",passmatch);
-        printf("%s\n",notfound);
+      if (gentest(i, passmatch) < 0){
+
       }
-      if(notfound == 0){
-        printf("!!!\n");
-        genpass(i,finalpass);
+      else{
+        genpass(i, finalpass)
       }
     }
     clock_gettime(CLOCK_MONOTONIC,&end_time);
