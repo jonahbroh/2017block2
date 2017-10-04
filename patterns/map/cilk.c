@@ -59,6 +59,7 @@ void genpass(long passnum, char* passbuff) {
 int gentest(int currpass, char* passmatch, char* param){
   genpass(currpass, passmatch);
   if (test(param,passmatch) == 0){
+    genpass(currpass, finalpass);
     return currpass;
   }
   else{
@@ -84,16 +85,14 @@ int main(int argc, char** argv) {
     clock_gettime(CLOCK_MONOTONIC,&start_time);
     // While a match has not been found, search
     int notfound=1;
-    for(int i = 0; i<99999999; i++){
+    cilk_for(int i = 0; i<99999999; i++){
       // generate the password
-      currpass = cilk_spawn gentest(i, passmatch, argv[1]);
-      if (currpass < 0){
-
+      if (gentest(i, passmatch, argv[1]) < 0){
+        printf("?\n");
       }
       else{
-        genpass(i, finalpass);
+        printf("!\n");
       }
-      cilk_sync;
     }
     clock_gettime(CLOCK_MONOTONIC,&end_time);
 
