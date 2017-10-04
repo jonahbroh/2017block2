@@ -79,6 +79,9 @@ int main(int argc, char** argv) {
       genpass(i,passmatch);
       // check for a match
       notfound=test(argv[1], passmatch);
+      if(i == 12345678){
+        printf("?\n");
+      }
       if(notfound == 0){
         printf("!!!\n");
         genpass(i,finalpass);
