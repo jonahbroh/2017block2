@@ -76,11 +76,8 @@ int main(int argc, char** argv) {
     int notfound=1;
     cilk_for(int i = 0; i<99999999; i++){
       // generate the password
-      genpass(i,passmatch);
-      if(i == 12345678){
-        printf("?\n");
-        printf("%s\n",passmatch);
-      }
+      currpass = i;
+      genpass(currpass,passmatch);
       // check for a match
       notfound=test(argv[1], passmatch);
       if(i == 12345678){
@@ -91,11 +88,6 @@ int main(int argc, char** argv) {
       if(notfound == 0){
         printf("!!!\n");
         genpass(i,finalpass);
-      }
-      if(i == 12345678){
-        printf("???\n");
-        printf("%s\n",passmatch);
-        printf("%s\n",notfound);
       }
     }
     clock_gettime(CLOCK_MONOTONIC,&end_time);
