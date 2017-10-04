@@ -201,9 +201,9 @@ int main( int argc, char* argv[] ) {
     for(int i = 0; i < rows; ++i) {
         for(int j = 0; j < cols; ++j) {
             const size_t offset = i + (j*rows);
-            dest.at<Vec3b>(i, j) = Vec3b(floor(outPixels[offset].red * 255.0),
-                                         floor(outPixels[offset].green * 255.0),
-                                         floor(outPixels[offset].blue * 255.0));
+            dest.at<Vec3b>(i, j) = Vec3b(floor(outPixels2[offset].red * 255.0),
+                                         floor(outPixels2[offset].green * 255.0),
+                                         floor(outPixels2[offset].blue * 255.0));
         }
     }
 
@@ -211,6 +211,6 @@ int main( int argc, char* argv[] ) {
 
 
     free(imagePixels);
-    free(outPixels);
+    free(outPixels2);
     return 0;
 }
