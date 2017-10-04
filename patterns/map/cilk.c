@@ -59,8 +59,8 @@ void genpass(long passnum, char* passbuff) {
 int gentest(int currpass, char* passmatch, char* param, char* finalpass){
   genpass(currpass, passmatch);
   if (test(param,passmatch) == 0){
-    printf(param+"\n");
-    printf(passmatch+"\n");
+    printf(param,"\n");
+    printf(passmatch,"\n");
     printf("%d\n",currpass);
     genpass(currpass, finalpass);
     return currpass;
