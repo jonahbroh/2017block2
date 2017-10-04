@@ -98,7 +98,7 @@ void apply_stencil(const int radius, const double stddev, const int rows, const 
     const int dim = radius*2+1;
     double kernel[dim*dim];
     double kernel2[dim*dim];
-    if stencil == 0{
+    if(stencil == 0){
       gaussian_kernel(dim, dim, stddev, kernel);
     }
     else{
