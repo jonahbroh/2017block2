@@ -19,6 +19,9 @@
 
 #include <cilk/cilk.h>
 
+#include <pthread.h>
+
+
 // valid pin characters
 const char* chars="0123456789";
 
