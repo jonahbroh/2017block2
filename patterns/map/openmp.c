@@ -72,7 +72,7 @@ int main(int argc, char** argv) {
     // While a match has not been found, search
     int notfound=1;
     #pragma omp for
-      for(i = 0; i<99999999; i++){
+      for(int i = 0; i<99999999; i++){
           // generate the password
           genpass(currpass,passmatch);
           // check for a match
