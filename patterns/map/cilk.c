@@ -17,6 +17,8 @@
 // clock measurements
 #include <time.h>
 
+#include <cilk/cilk.h>
+
 // valid pin characters
 const char* chars="0123456789";
 
