@@ -98,13 +98,15 @@ void apply_stencil(const int radius, const double stddev, const int rows, const 
     const int dim = radius*2+1;
     double kernel[dim*dim];
     double kernel2[dim*dim];
+    double kernelX[3*3];
+    double kernelY[3*3]
     if(stencil == 0){
       gaussian_kernel(dim, dim, stddev, kernel);
     }
     else{
       for(int i = 0; i < dim-3; i++){
-        prewittX_kernel(i, i+2, kernel);
-        prewittY_kernel(i, i+2, kernel2);
+        prewittX_kernel(i, i+2, kernelX);
+        prewittY_kernel(i, i+2, kernelY);
       }
     }
     // For each pixel in the image...
@@ -124,10 +126,10 @@ void apply_stencil(const int radius, const double stddev, const int rows, const 
                           out[out_offset].red   += kernel[k_offset] * in[in_offset].red;
                           out[out_offset].green += kernel[k_offset] * in[in_offset].green;
                           out[out_offset].blue  += kernel[k_offset] * in[in_offset].blue;
-                          // double intensity = (out[out_offset].red + out[out_offset].green + out[out_offset].blue)/3.0;
-                          // out[out_offset].red = intensity;
-                          // out[out_offset].green = intensity;
-                          // out[out_offset].blue  = intensity;
+                          double intensity = (out[out_offset].red + out[out_offset].green + out[out_offset].blue)/3.0;
+                          out[out_offset].red = intensity;
+                          out[out_offset].green = intensity;
+                          out[out_offset].blue  = intensity;
                         }
                         else{
                           double intensity = (in[in_offset].red + in[in_offset].green + in[in_offset].blue)/3.0;
