@@ -12,7 +12,9 @@ long q(long n) {
         return 1;
     }
     #pragma omp task
-    int i = q(n - q(n-1));
+    {
+      int i = q(n - q(n-1));
+    }
     int ii = q(n-q(n-2));
     #pragma omp taskwait
     return i + ii;
@@ -29,8 +31,11 @@ int main(int argc, char** argv) {
     struct timespec end_time;
     clock_gettime(CLOCK_MONOTONIC,&start_time);
     #pragma omp parallel
-    #pragma omp single
-    out = q(n);
+    {
+      #pragma omp single{
+        out = q(n);
+      }
+    }
     clock_gettime(CLOCK_MONOTONIC,&end_time);
     long msec = (end_time.tv_sec - start_time.tv_sec)*1000 + (end_time.tv_nsec - start_time.tv_nsec)/1000000;
 
