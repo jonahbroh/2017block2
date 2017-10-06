@@ -12,12 +12,13 @@ long q(long n) {
         return 1;
     }
     int i = 0;
-    // #pragma omp task
-    // {
+    int ii = 0;
+    #pragma omp task
+    {
       i = q(n - q(n-1));
-    // }
-    int ii = q(n-q(n-2));
-    // #pragma omp taskwait
+      ii = q(n-q(n-2));
+    }
+    #pragma omp taskwait
     return i + ii;
 }
 
