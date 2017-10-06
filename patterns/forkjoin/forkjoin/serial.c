@@ -12,7 +12,7 @@ long q(long n) {
     if(n<3) {
         return 1;
     }
-    return cilk_spawn q(n - q(n-1)) + q(n-q(n-2));
+    return q(n - q(n-1)) + q(n-q(n-2));
 }
 
 int main(int argc, char** argv) {
