@@ -12,7 +12,7 @@ long q(long n) {
     if(n<3) {
         return 1;
     }
-    int i = cilk_spawn q(n - q(n-1))
+    int i = cilk_spawn q(n - q(n-1));
     int ii = cilk_spawn q(n-q(n-2));
     cilk_sync;
     return i + ii;
