@@ -17,10 +17,7 @@ long q(long n) {
     {
       i = q(n - q(n-1));
     }
-    #pragma omp task shared(ii) firstprivate(n)
-    {
     ii = q(n-q(n-2));
-    }
     #pragma omp taskwait
     return i + ii;
 }
