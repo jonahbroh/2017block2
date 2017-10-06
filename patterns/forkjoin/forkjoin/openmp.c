@@ -11,9 +11,8 @@ long q(long n) {
     if(n<3) {
         return 1;
     }
-    #pragma omp task{
-      int i = q(n - q(n-1));
-    }
+    #pragma omp task
+    int i = q(n - q(n-1));
     int ii = q(n-q(n-2));
     #pragma omp taskwait
     return i + ii;
