@@ -32,7 +32,8 @@ int main(int argc, char** argv) {
     clock_gettime(CLOCK_MONOTONIC,&start_time);
     #pragma omp parallel
     {
-      #pragma omp single{
+      #pragma omp single
+      {
         out = q(n);
       }
     }
