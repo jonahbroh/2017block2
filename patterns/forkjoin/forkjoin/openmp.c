@@ -13,7 +13,7 @@ long q(long n) {
     }
     int i = 0;
     int ii = 0;
-    #pragma omp task firstprivate(n)
+    #pragma omp task shared(i) firstprivate(n)
     {
       i = q(n - q(n-1));
     }
