@@ -12,8 +12,9 @@ long q(long n) {
     if(n<3) {
         return 1;
     }
-    int i = q(n - q(n-1));
+    int i = cilk_spawn q(n - q(n-1));
     int ii = q(n-q(n-2));
+    cilk_sync;
     return i + ii;
 }
 
@@ -27,8 +28,7 @@ int main(int argc, char** argv) {
     struct timespec start_time;
     struct timespec end_time;
     clock_gettime(CLOCK_MONOTONIC,&start_time);
-    out = cilk_spawn q(n);
-    cilk_sync;
+    out = q(n);
     clock_gettime(CLOCK_MONOTONIC,&end_time);
     long msec = (end_time.tv_sec - start_time.tv_sec)*1000 + (end_time.tv_nsec - start_time.tv_nsec)/1000000;
 
