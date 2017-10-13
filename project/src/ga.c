@@ -7,13 +7,13 @@ char* gamepath = "../Mario/";
 
 int pop_size = 100;
 
-struct population{
-  agent[pop_size] agents;
-}
-
 struct agent{
   int fitness = 0;
   int[16] chromosome;
+}
+
+struct population{
+  agent[pop_size] agents;
 }
 
 population init_population(){
