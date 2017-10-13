@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include <stlib.h>
+#include <stdlib.h>
 #include <unistd.h>
 
 char* javapath = "/modules/packages/jdk-9";
