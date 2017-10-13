@@ -2,6 +2,8 @@
 #include <stlib.h>
 #include <unistd.h>
 
+char* javapath = "/modules/packages/jdk-9";
+char* gamepath = "../Mario/";
 
 int pop_size = 100;
 
@@ -44,14 +46,16 @@ void sort_fitness(population pop){
 
 agent mutate(agent child, int mutation_rate=10){
   if(rand()%100 < mutation_rate){
-
+    for(int i = 1; i < 16; i+=2){
+      a.chromosome[i] = rand()%4;
+    }
   }
   return child;
 }
 
 agent crossover(agent p1, agent p2){
   agent child;
-  for(i = 0; i < 16; i++){
+  for(i = 1; i < 16; i+=2){
     if rand()%2 == 0{
       child.chromosome[i] = p1.chromosome[i];
     }
@@ -75,7 +79,12 @@ agent pickFitParent(population pop){
 agent generateRandomAgent(){
   agent a;
   for(int i = 0; i < 16; i++){
-    a.chromosome[i] = rand()
+    if((i+1)%2 == 1){
+      a.chromosome[i] = i/2 + 1;
+    }
+    else{
+      a.chromosome[i] = rand()%4;
+    }
   }
   return a;
 }
@@ -103,7 +112,7 @@ population new_population(population pop, int crossover_rate = 80){
 int sum_fitness(population pop){
   int total = 0;
   for(i = 0; i < pop_size; i++){
-    total += pop.agents[i].fitness
+    total += pop.agents[i].fitness;
   }
   return total;
 }
@@ -113,7 +122,7 @@ int sort_func(agent e1, agent e2){
 }
 
 char* chromosome_string(agent a){
-  char chrom[100]
+  char chrom[100];
   int n = 0;
   for(i = 0; i < 16; i++){
     n += snprintf(&chrom[n], "%d,", a.chromosome[i]);
