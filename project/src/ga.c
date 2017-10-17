@@ -71,11 +71,6 @@ void fitness(population pop){
       printf("!!\n");
       int status;
       waitpid(pid, &status, 0);
-    }
-    else{
-      execl(javapath, "-cp", gamepath, classname, "1", i, chromosome_string(pop.agents[i]));
-      _exit(EXIT_FAILURE);
-      printf("!!!\n");
       FILE* fit;
       char fitpath[100];
       char* fitstr;
@@ -83,6 +78,11 @@ void fitness(population pop){
       fit = fopen(fitpath, "r");
       fitstr = fgets(fitstr, 100, fit);
       pop.agents[i].fitness = atoi(fitstr);
+    }
+    else{
+      execl(javapath, "-cp", gamepath, classname, "1", i, chromosome_string(pop.agents[i]));
+      _exit(EXIT_FAILURE);
+      printf("!!!\n");
     }
 
   }
