@@ -33,30 +33,32 @@ public class Play {
         options.setNumberOfTrials(1);
         options.setMatlabFileName("");
         options.setLevelRandSeed((int) (Math.random () * Integer.MAX_VALUE));
-        options.setLevelDifficulty(3);
+        options.setLevelDifficulty(0);
         task.setOptions(options);
-        if (args.length > 1){
+        if (args.length > 0 && args[0].equals("1")){
+          // options.setVisualization(false);
           try{
             BufferedWriter bw = null;
   		      FileWriter fw = null;
-            String filename = "./scores/fitness" + args[1];
-            File file = new File(filename);
+            String filename = "fitness" + args[1] + ".txt";
+            File file = new File("scores", filename);
+            System.out.println(file);
             if (!file.exists()){
               file.createNewFile();
             }
-
-            fw = new FileWriter(file.getAbsoluteFile());
-  			    bw = new BufferedWriter(fw);
-
-            bw.write(Double.toString(task.evaluate(controller)[0]));
-            bw.close();
-            fw.close();
+  			    BufferedWriter writer = new BufferedWriter(new FileWriter(file.getAbsoluteFile()));
+            String score = Double.toString(task.evaluate(controller)[0]);
+            System.out.println(score);
+            writer.write(score);
+            writer.close();
+            System.exit(0);
           }catch(IOException e){
-            System.out.println("PROBLEM");
+            System.out.println("File IO problem");
           }
         }
         else{
           System.out.println ("Score: " + task.evaluate (controller)[0]);
+          System.exit(0);
         }
     }
 }
