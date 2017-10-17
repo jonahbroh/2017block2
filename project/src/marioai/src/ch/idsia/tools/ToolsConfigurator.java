@@ -96,7 +96,6 @@ public class ToolsConfigurator extends JFrame
 //        frame.setLocation((screenSize.width-frame.getWidth())/2, (screenSize.height-frame.getHeight())/2);
         if (marioComponentFrame == null)
         {
-            System.setProperty("java.awt.headless", "true"); 
             marioComponentFrame = new JFrame(/*evaluationOptions.getAgentName() +*/ "Mario Intelligent 2.0");
             marioComponent = new MarioComponent(320, 240);
             marioComponentFrame.setContentPane(marioComponent);
