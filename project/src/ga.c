@@ -134,25 +134,25 @@ agent pickFitParent(population pop){
   return pop.agents[ind];
 }
 
-population new_population(population pop, int crossover_rate){
-  population new_pop;
-  for(int i= 0; i < pop_size; i++){
-    int r = rand()%100;
-    if(r < crossover_rate){
-      agent p1 = pickFitParent(pop);
-      agent p2 = pickFitParent(pop);
-      agent child = crossover(p1, p2);
-      child = mutate(child, mutation_rate);
-      new_pop.agents[i] = child;
-    }
-    else{
-      agent child = pickFitParent(pop);
-      child = mutate(child, mutation_rate);
-      new_pop.agents[i] = child;
-    }
-  }
-  return new_pop;
-}
+// population new_population(population pop, int crossover_rate){
+//   population new_pop;
+//   for(int i= 0; i < pop_size; i++){
+//     int r = rand()%100;
+//     if(r < crossover_rate){
+//       agent p1 = pickFitParent(pop);
+//       agent p2 = pickFitParent(pop);
+//       agent child = crossover(p1, p2);
+//       child = mutate(child, mutation_rate);
+//       new_pop.agents[i] = child;
+//     }
+//     else{
+//       agent child = pickFitParent(pop);
+//       child = mutate(child, mutation_rate);
+//       new_pop.agents[i] = child;
+//     }
+//   }
+//   return new_pop;
+// }
 
 int main(int argc, char** argv) {
   population pop = init_population();
@@ -164,7 +164,7 @@ int main(int argc, char** argv) {
       printf("Fitness: %d Generations: %d", pop.agents[0].fitness, i);
       return i;
     }
-    pop = new_population(pop, crossover_rate);
+    // pop = new_population(pop, crossover_rate);
     printf("???");
   }
   printf("Fitness: %d Generations: %d", pop.agents[0].fitness, 500);
