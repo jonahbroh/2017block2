@@ -5,7 +5,8 @@
 #include <unistd.h>
 
 char* javapath = "/modules/packages/jdk-9";
-char* gamepath = "./marioai/classes/ch/idsia/scenarios/Play";
+char* gamepath = "./marioai/classes/";
+char* classname = "ch.idsia.scenarios.Play"
 
 int pop_size = 10;
 int mutation_rate = 10;
@@ -60,12 +61,12 @@ void fitness(population pop){
       waitpid(pid, &status, 0);
     }
     else{
-      execl(javapath, "-jar", gamepath, "GAgent", i, chromosome_string(pop.agents[i]));
+      execl(javapath, "-cp", gamepath, classname, "1", i, chromosome_string(pop.agents[i]));
       _exit(EXIT_FAILURE);
       FILE fit;
       char fitpath[100];
       char fitstr[100];
-      sprintf(fitpath, "%s%d", fitdir, i);
+      sprintf(fitpath, "%s%d", fitstr, i);
       fit = fopen(fitpath, "r");
       fitstr = fgets(fitstr, 100, fit);
       pop.agents[i].fitness = atoi(fitstr);
@@ -148,10 +149,12 @@ int main(int argc, char** argv) {
   population pop = init_population();
   for(int i= 0; i < num_epochs; i++){
     fitness(pop);
-    if(pop.agents[0].fitness == 4000){
+    if(pop.agents[0].fitness >= 4416){
+      printf("Fitness: %d Generations: %d", agents[0].fitness, i);
       return i;
     }
     pop = new_population(pop, crossover_rate);
   }
+  printf("Fitness: %d Generations: %d", agents[0].fitness, 500);
   return 500;
 }
