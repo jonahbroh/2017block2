@@ -95,21 +95,23 @@ public class ToolsConfigurator extends JFrame
 //        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 //        frame.setLocation((screenSize.width-frame.getWidth())/2, (screenSize.height-frame.getHeight())/2);
 
-        GraphicsEnvironment ge =
-        GraphicsEnvironment.getLocalGraphicsEnvironment();
+        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
         boolean headless_check = ge.isHeadless();
-        if(!headless_check){
-          if (marioComponentFrame == null)
-          {
+        if (marioComponentFrame == null)
+        {
+            if(!headless_check){
               marioComponentFrame = new JFrame(/*evaluationOptions.getAgentName() +*/ "Mario Intelligent 2.0");
-              marioComponent = new MarioComponent(320, 240);
-              marioComponentFrame.setContentPane(marioComponent);
-              marioComponent.init();
               marioComponentFrame.pack();
               marioComponentFrame.setResizable(false);
               marioComponentFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-          }
-  //        marioComponentFrame.setTitle(evaluationOptions.getAgent().getName() + " - Mario Intelligent 2.0");
+              marioComponentFrame.setContentPane(marioComponent);
+            }
+            marioComponent = new MarioComponent(320, 240);
+            marioComponent.init();
+
+        }
+//        marioComponentFrame.setTitle(evaluationOptions.getAgent().getName() + " - Mario Intelligent 2.0");
+        if(!headless_check){
           marioComponentFrame.setAlwaysOnTop(evaluationOptions.isViewAlwaysOnTop());
           marioComponentFrame.setLocation(evaluationOptions.getViewLocation());
           marioComponentFrame.setVisible(evaluationOptions.isVisualization());
