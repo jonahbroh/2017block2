@@ -6,7 +6,7 @@
 
 char* javapath = "/modules/packages/jdk-9";
 char* gamepath = "./marioai/classes/";
-char* classname = "ch.idsia.scenarios.Play"
+char* classname = "ch.idsia.scenarios.Play";
 
 int pop_size = 10;
 int mutation_rate = 10;
@@ -63,7 +63,7 @@ void fitness(population pop){
     else{
       execl(javapath, "-cp", gamepath, classname, "1", i, chromosome_string(pop.agents[i]));
       _exit(EXIT_FAILURE);
-      FILE fit;
+      FILE fit;git p
       char fitpath[100];
       char fitstr[100];
       sprintf(fitpath, "%s%d", fitstr, i);
