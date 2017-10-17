@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <sys/wait.h>
 
 char* javapath = "/modules/packages/jdk-9";
 char* gamepath = "./marioai/classes/";
