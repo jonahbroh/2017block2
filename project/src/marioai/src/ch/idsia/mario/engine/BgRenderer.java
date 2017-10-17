@@ -28,9 +28,13 @@ public class BgRenderer
         this.height = height;
 
         this.level = level;
-        image = graphicsConfiguration.createCompatibleImage(width, height, Transparency.BITMASK);
-        g = (Graphics2D) image.getGraphics();
-        g.setComposite(AlphaComposite.Src);
+        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+        boolean headless_check = ge.isHeadless();
+        if(!headless_check){
+          image = graphicsConfiguration.createCompatibleImage(width, height, Transparency.BITMASK);
+          g = (Graphics2D) image.getGraphics();
+          g.setComposite(AlphaComposite.Src);
+        }
 
         updateArea(0, 0, width, height);
     }
@@ -72,25 +76,35 @@ public class BgRenderer
 
     private void updateArea(int x0, int y0, int w, int h)
     {
-        g.setBackground(transparent);
-        g.clearRect(x0, y0, w, h);
-        int xTileStart = (x0 + xCam) / 32;
-        int yTileStart = (y0 + yCam) / 32;
-        int xTileEnd = (x0 + xCam + w) / 32;
-        int yTileEnd = (y0 + yCam + h) / 32;
-        for (int x = xTileStart; x <= xTileEnd; x++)
-        {
-            for (int y = yTileStart; y <= yTileEnd; y++)
-            {
-                int b = level.getBlock(x, y) & 0xff;
-                g.drawImage(Art.bg[b % 8][b / 8], (x << 5) - xCam, (y << 5) - yCam-16, null);
-            }
+        GraphicsEnvironment ge =
+        GraphicsEnvironment.getLocalGraphicsEnvironment();
+        boolean headless_check = ge.isHeadless();
+          if(!headless_check){
+          g.setBackground(transparent);
+          g.clearRect(x0, y0, w, h);
+          int xTileStart = (x0 + xCam) / 32;
+          int yTileStart = (y0 + yCam) / 32;
+          int xTileEnd = (x0 + xCam + w) / 32;
+          int yTileEnd = (y0 + yCam + h) / 32;
+          for (int x = xTileStart; x <= xTileEnd; x++)
+          {
+              for (int y = yTileStart; y <= yTileEnd; y++)
+              {
+                  int b = level.getBlock(x, y) & 0xff;
+                  g.drawImage(Art.bg[b % 8][b / 8], (x << 5) - xCam, (y << 5) - yCam-16, null);
+              }
+          }
         }
     }
 
     public void render(Graphics g, int tick, float alpha)
     {
+      GraphicsEnvironment ge =
+      GraphicsEnvironment.getLocalGraphicsEnvironment();
+      boolean headless_check = ge.isHeadless();
+      if(!headless_check){
         g.drawImage(image, 0, 0, null);
+      }
     }
 
     public void setLevel(Level level)
