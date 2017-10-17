@@ -152,11 +152,11 @@ int main(int argc, char** argv) {
   for(int i= 0; i < num_epochs; i++){
     fitness(pop);
     if(pop.agents[0].fitness >= 4416){
-      printf("Fitness: %d Generations: %d", agents[0].fitness, i);
+      printf("Fitness: %d Generations: %d", pop.agents[0].fitness, i);
       return i;
     }
     pop = new_population(pop, crossover_rate);
   }
-  printf("Fitness: %d Generations: %d", agents[0].fitness, 500);
+  printf("Fitness: %d Generations: %d", pop.agents[0].fitness, 500);
   return 500;
 }
