@@ -68,7 +68,7 @@ public class MarioComponent extends JComponent implements Runnable, /*KeyListene
         {
             this.cheatAgent = new CheaterKeyboardAgent();
             this.addKeyListener(cheatAgent);
-        }        
+        }
 
         GlobalOptions.registerMarioComponent(this);
     }
@@ -116,10 +116,14 @@ public class MarioComponent extends JComponent implements Runnable, /*KeyListene
         VolatileImage image = null;
         Graphics g = null;
         Graphics og = null;
-
-        image = createVolatileImage(320, 240);
-        g = getGraphics();
-        og = image.getGraphics();
+        GraphicsEnvironment ge =
+        GraphicsEnvironment.getLocalGraphicsEnvironment();
+        boolean headless_check = ge.isHeadless();
+        if(!headless_check){
+          image = createVolatileImage(320, 240);
+          g = getGraphics();
+          og = image.getGraphics();
+        }
 
         if (!GlobalOptions.VisualizationOn) {
             String msgClick = "Vizualization is not available";
@@ -197,7 +201,7 @@ public class MarioComponent extends JComponent implements Runnable, /*KeyListene
                         msg += (action[i]) ? scene.keysStr[i] : "      ";
                 }
                 else
-                    msg = "NULL";                    
+                    msg = "NULL";
                 drawString(og, msg, 6, 78, 1);
 
                 if (!this.hasFocus() && tick / 4 % 2 == 0) {
@@ -266,7 +270,12 @@ public class MarioComponent extends JComponent implements Runnable, /*KeyListene
     private void drawString(Graphics g, String text, int x, int y, int c) {
         char[] ch = text.toCharArray();
         for (int i = 0; i < ch.length; i++) {
+          GraphicsEnvironment ge =
+          GraphicsEnvironment.getLocalGraphicsEnvironment();
+          boolean headless_check = ge.isHeadless();
+          if(!headless_check){
             g.drawImage(Art.font[ch[i] - 32][c], x + i * 8, y, null);
+          }
         }
     }
 
@@ -317,7 +326,7 @@ public class MarioComponent extends JComponent implements Runnable, /*KeyListene
         else {
             //
             return new String();
-        }                
+        }
     }
 
     public String getBitmapLevelObservation()

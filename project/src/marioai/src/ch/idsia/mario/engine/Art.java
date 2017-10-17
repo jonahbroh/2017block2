@@ -3,6 +3,7 @@ package ch.idsia.mario.engine;
 import java.awt.AlphaComposite;
 import java.awt.Graphics2D;
 import java.awt.GraphicsConfiguration;
+import java.awt.GraphicsEnvironment;
 import java.awt.Image;
 import java.awt.Transparency;
 import java.awt.image.BufferedImage;
@@ -40,6 +41,10 @@ public class Art
         {
 //            System.out.println("Image Directory: " + img);
 //            System.out.println(curDir);
+          GraphicsEnvironment ge =
+          GraphicsEnvironment.getLocalGraphicsEnvironment();
+          boolean headless_check = ge.isHeadless();
+          if(!headless_check){
             mario = cutImage(gc, "mariosheet.png", 32, 32);
             smallMario = cutImage(gc, "smallmariosheet.png", 16, 16);
             fireMario = cutImage(gc, "firemariosheet.png", 32, 32);
@@ -54,6 +59,7 @@ public class Art
             font = cutImage(gc, "font.gif", 8, 8);
             endScene = cutImage(gc, "endscene.gif", 96, 96);
             gameOver = cutImage(gc, "gameovergost.gif", 96, 64);
+          }
         }
         catch (Exception e)
         {
@@ -67,7 +73,12 @@ public class Art
         // System.out.println("trying to get " + imageName);
         BufferedImage source = null;
         try {
+          GraphicsEnvironment ge =
+          GraphicsEnvironment.getLocalGraphicsEnvironment();
+          boolean headless_check = ge.isHeadless();
+          if(!headless_check){
             source = ImageIO.read(Art.class.getResourceAsStream(imageName));
+          }
             // System.out.println("source: " + source);
         }
         catch (Exception e) {
@@ -96,10 +107,15 @@ public class Art
         }
         //System.out.println("gc: " + gc);
         Image image = gc.createCompatibleImage(source.getWidth(), source.getHeight(), Transparency.BITMASK);
-        Graphics2D g = (Graphics2D) image.getGraphics();
-        g.setComposite(AlphaComposite.Src);
-        g.drawImage(source, 0, 0, null);
-        g.dispose();
+        GraphicsEnvironment ge =
+        GraphicsEnvironment.getLocalGraphicsEnvironment();
+        boolean headless_check = ge.isHeadless();
+        if(!headless_check){
+          Graphics2D g = (Graphics2D) image.getGraphics();
+          g.setComposite(AlphaComposite.Src);
+          g.drawImage(source, 0, 0, null);
+          g.dispose();
+        }
         return image;
     }
 
@@ -111,12 +127,17 @@ public class Art
         {
             for (int y = 0; y < source.getHeight(null) / ySize; y++)
             {
+              GraphicsEnvironment ge =
+              GraphicsEnvironment.getLocalGraphicsEnvironment();
+              boolean headless_check = ge.isHeadless();
+              if(!headless_check){
                 Image image = gc.createCompatibleImage(xSize, ySize, Transparency.BITMASK);
                 Graphics2D g = (Graphics2D) image.getGraphics();
                 g.setComposite(AlphaComposite.Src);
                 g.drawImage(source, -x * xSize, -y * ySize, null);
                 g.dispose();
                 images[x][y] = image;
+              }
             }
         }
 
