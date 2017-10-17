@@ -65,7 +65,7 @@ void fitness(population pop){
     pid_t parent = getpid();
     pid_t pid = fork();
     if (pid == -1){
-      sprintf("!!!");
+      printf("!!!");
     }
     else if (pid > 0){
       int status;
