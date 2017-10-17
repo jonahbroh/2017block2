@@ -93,9 +93,10 @@ public class ToolsConfigurator extends JFrame
     static void CreateMarioComponentFrame(EvaluationOptions evaluationOptions)
     {
 //        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-//        frame.setLocation((screenSize.width-frame.getWidth())/2, (screenSize.height-frame.getHeight())/2);        
+//        frame.setLocation((screenSize.width-frame.getWidth())/2, (screenSize.height-frame.getHeight())/2);
         if (marioComponentFrame == null)
         {
+            System.setProperty("java.awt.headless", "true"); 
             marioComponentFrame = new JFrame(/*evaluationOptions.getAgentName() +*/ "Mario Intelligent 2.0");
             marioComponent = new MarioComponent(320, 240);
             marioComponentFrame.setContentPane(marioComponent);
@@ -316,7 +317,7 @@ public class ToolsConfigurator extends JFrame
         JPanel borderPanel = new JPanel();
         borderPanel.add(BorderLayout.NORTH, ToolsConfiguratorOptionsPanel);
         setContentPane(borderPanel);
-        // autosize: 
+        // autosize:
         this.pack();
     }
 
@@ -351,7 +352,7 @@ public class ToolsConfigurator extends JFrame
         evaluationOptions.setPowerRestoration(CheckboxPowerRestoration.getState());
         evaluationOptions.setExitProgramWhenFinished(CheckboxExitOnFinish.getState());
         evaluationOptions.setMatlabFileName(TextFieldMatLabFileName.getText());
-        
+
         return evaluationOptions;
     }
 
