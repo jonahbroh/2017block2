@@ -80,9 +80,9 @@ void fitness(population pop){
       pop.agents[i].fitness = atoi(fitstr);
     }
     else{
-      execl(javapath, "-cp", gamepath, classname, "1", i, chromosome_string(pop.agents[i]));
-      _exit(EXIT_FAILURE);
+      execl(javapath, "java", "-cp", gamepath, classname, "1", i, chromosome_string(pop.agents[i]));
       printf("!!!\n");
+      _exit(EXIT_FAILURE);
     }
 
   }
