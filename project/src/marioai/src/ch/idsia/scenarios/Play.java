@@ -29,7 +29,8 @@ public class Play {
         options.setAgent(controller);
         Task task = new ProgressTask(options);
         options.setMaxFPS(false);
-        // options.setVisualization(true);
+        // options.setVisualization(true);        
+        System.setProperty("java.awt.headless", "true");
         options.setNumberOfTrials(1);
         options.setMatlabFileName("");
         options.setLevelRandSeed((int) (Math.random () * Integer.MAX_VALUE));
