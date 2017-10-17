@@ -22,6 +22,15 @@ typedef struct{
   agent* agents;
 } population;
 
+
+int sort_func(const void *e1, const void *e2){
+  return ((agent *)e1)->fitness - ((agent *)e2)->fitness;
+}
+
+void sort_fitness(population pop){
+  qsort(pop.agents, pop_size, sizeof(agent), sort_func);
+}
+
 char* chromosome_string(agent a){
   char* chrom = malloc(100 * sizeof(char));
   int n = 0;
@@ -63,7 +72,7 @@ void fitness(population pop){
     else{
       execl(javapath, "-cp", gamepath, classname, "1", i, chromosome_string(pop.agents[i]));
       _exit(EXIT_FAILURE);
-      FILE fit;git p
+      FILE fit;
       char fitpath[100];
       char fitstr[100];
       sprintf(fitpath, "%s%d", fitstr, i);
@@ -74,14 +83,6 @@ void fitness(population pop){
 
   }
   sort_fitness(pop);
-}
-
-int sort_func(const void *e1, const void *e2){
-  return ((agent *)e1)->fitness - ((agent *)e2)->fitness;
-}
-
-void sort_fitness(population pop){
-  qsort(pop.agents, pop_size, sizeof(agent), sort_func);
 }
 
 agent mutate(agent child, int mutation_rate){
