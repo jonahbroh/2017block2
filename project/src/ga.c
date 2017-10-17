@@ -1,23 +1,47 @@
+//Sort function,
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
 
 char* javapath = "/modules/packages/jdk-9";
-char* gamepath = "../Mario/";
+char* gamepath = "./marioai/classes/ch/idsia/scenarios/Play";
 
-int pop_size = 100;
+int pop_size = 10;
+int mutation_rate = 10;
+int crossover_rate = 80;
+int num_epochs = 500;
 
-struct agent{
-  int fitness = 0;
-  int[16] chromosome;
+typedef struct{
+  int fitness;
+  int* chromosome;
+} agent;
+
+typedef struct{
+  agent* agents;
+} population;
+
+char* chromosome_string(agent a){
+  char* chrom = malloc(100 * sizeof(char));
+  int n = 0;
+  for(int i = 0; i < 28; i++){
+    n += sprintf(&chrom[n], "%d", a.chromosome[i]);
+  }
+  return chrom;
 }
-
-struct population{
-  agent[pop_size] agents;
+agent generateRandomAgent(){
+  agent a;
+  a.chromosome = malloc(28 * sizeof(int));
+  for(int i = 0; i < 28; i++){
+    a.chromosome[i] = rand()%4;
+  }
+  a.fitness = 0;
+  return a;
 }
 
 population init_population(){
   population pop;
+  pop.agents = malloc(pop_size * sizeof(agent));
   for(int i = 0; i < pop_size; i++){
     pop.agents[i] = generateRandomAgent();
   }
@@ -26,28 +50,43 @@ population init_population(){
 
 void fitness(population pop){
   for(int i = 0; i < pop_size; i++){
-    switch ((pid = fork())){
-      case -1:
-        //OH NO
-      case 0:
-        //Pass i to avoid race conditions?
-        execl(javapath, "-jar", gamepath, chromosome_string(pop.agents[i]));
-      default:
-        //Wait, check, set fitness
+    pid_t parent = getpid();
+    pid_t pid = fork();
+    if (pid == -1){
+      //OH NO ERROR
+    }
+    else if (pid > 0){
+      int status;
+      waitpid(pid, &status, 0);
+    }
+    else{
+      execl(javapath, "-jar", gamepath, "GAgent", i, chromosome_string(pop.agents[i]));
+      _exit(EXIT_FAILURE);
+      FILE fit;
+      char fitpath[100];
+      char fitstr[100];
+      sprintf(fitpath, "%s%d", fitdir, i);
+      fit = fopen(fitpath, "r");
+      fitstr = fgets(fitstr, 100, fit);
+      pop.agents[i].fitness = atoi(fitstr);
     }
 
   }
+  sort_fitness(pop);
+}
 
+int sort_func(const void *e1, const void *e2){
+  return ((agent *)e1)->fitness - ((agent *)e2)->fitness;
 }
 
 void sort_fitness(population pop){
-  qsort(pop, pop_size, sizeof(agent), sort_func);
+  qsort(pop.agents, pop_size, sizeof(agent), sort_func);
 }
 
-agent mutate(agent child, int mutation_rate=10){
+agent mutate(agent child, int mutation_rate){
   if(rand()%100 < mutation_rate){
-    for(int i = 1; i < 16; i+=2){
-      a.chromosome[i] = rand()%4;
+    for(int i = 0; i < 28; i++){
+      child.chromosome[i] = rand()%4;
     }
   }
   return child;
@@ -55,8 +94,8 @@ agent mutate(agent child, int mutation_rate=10){
 
 agent crossover(agent p1, agent p2){
   agent child;
-  for(i = 1; i < 16; i+=2){
-    if rand()%2 == 0{
+  for(int i= 1; i < 28; i+=2){
+    if(rand()%2 == 0){
       child.chromosome[i] = p1.chromosome[i];
     }
     else{
@@ -66,74 +105,53 @@ agent crossover(agent p1, agent p2){
   return child;
 }
 
-agent pickFitParent(population pop){
-  int total_fitness = sum_fitness(pop);
-  int r = rand()%total_fitness;
-  ind = -1;
-  for(int i = 0; r > 0; i++){
-    r -= pop.agents[i].fitness;
-  }
-  return pop.agents[i];
-}
-
-agent generateRandomAgent(){
-  agent a;
-  for(int i = 0; i < 16; i++){
-    if((i+1)%2 == 1){
-      a.chromosome[i] = i/2 + 1;
-    }
-    else{
-      a.chromosome[i] = rand()%4;
-    }
-  }
-  return a;
-}
-
-population new_population(population pop, int crossover_rate = 80){
-  population new_pop;
-  for(i = 0; i < pop_size; i++){
-    int r = rand()%100;
-    if(r < crossover_rate){
-      agent p1 = pickFitParent(pop);
-      agent p2 = pickFitParent(pop);
-      agent child = crossover(p1, p2);
-      child = mutate(child);
-      new_pop[i] = child;
-    }
-    else{
-      agent child = pickFitParent(pop);
-      child = mutate(child);
-      new_pop[i] = child;
-    }
-  }
-  return new_pop;
-}
-
 int sum_fitness(population pop){
   int total = 0;
-  for(i = 0; i < pop_size; i++){
+  for(int i= 0; i < pop_size; i++){
     total += pop.agents[i].fitness;
   }
   return total;
 }
 
-int sort_func(agent e1, agent e2){
-  return e1.fitness - e2.fitness;
+agent pickFitParent(population pop){
+  int total_fitness = sum_fitness(pop);
+  int r = rand()%total_fitness;
+  int ind = 0;
+  for(int i = 0; r > 0; i++){
+    ind = i;
+    r -= pop.agents[i].fitness;
+  }
+  return pop.agents[ind];
 }
 
-char* chromosome_string(agent a){
-  char chrom[100];
-  int n = 0;
-  for(i = 0; i < 16; i++){
-    n += snprintf(&chrom[n], "%d,", a.chromosome[i]);
+population new_population(population pop, int crossover_rate){
+  population new_pop;
+  for(int i= 0; i < pop_size; i++){
+    int r = rand()%100;
+    if(r < crossover_rate){
+      agent p1 = pickFitParent(pop);
+      agent p2 = pickFitParent(pop);
+      agent child = crossover(p1, p2);
+      child = mutate(child, mutation_rate);
+      new_pop.agents[i] = child;
+    }
+    else{
+      agent child = pickFitParent(pop);
+      child = mutate(child, mutation_rate);
+      new_pop.agents[i] = child;
+    }
   }
-  return chrom;
+  return new_pop;
 }
 
 int main(int argc, char** argv) {
-  population pop = init_population;
-  for(i = 0; i < num_epochs; i++){
+  population pop = init_population();
+  for(int i= 0; i < num_epochs; i++){
     fitness(pop);
-    pop = new_population(pop);
+    if(pop.agents[0].fitness == 4000){
+      return i;
+    }
+    pop = new_population(pop, crossover_rate);
   }
+  return 500;
 }
