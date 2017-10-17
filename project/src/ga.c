@@ -155,19 +155,18 @@ population new_population(population pop, int crossover_rate){
 }
 
 int main(int argc, char** argv) {
-  printf("?????");
-  // population pop = init_population();
-  // printf("?");
-  // for(int i= 0; i < num_epochs; i++){
-  //   fitness(pop);
-  //   printf("??");
-  //   if(pop.agents[0].fitness >= 4416){
-  //     printf("Fitness: %d Generations: %d", pop.agents[0].fitness, i);
-  //     return i;
-  //   }
-  //   pop = new_population(pop, crossover_rate);
-  //   printf("???");
-  // }
-  // printf("Fitness: %d Generations: %d", pop.agents[0].fitness, 500);
-  // return 500;
+  population pop = init_population();
+  printf("?");
+  for(int i= 0; i < num_epochs; i++){
+    fitness(pop);
+    printf("??");
+    if(pop.agents[0].fitness >= 4416){
+      printf("Fitness: %d Generations: %d", pop.agents[0].fitness, i);
+      return i;
+    }
+    pop = new_population(pop, crossover_rate);
+    printf("???");
+  }
+  printf("Fitness: %d Generations: %d", pop.agents[0].fitness, 500);
+  return 500;
 }
