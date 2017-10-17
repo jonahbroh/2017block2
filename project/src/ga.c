@@ -51,7 +51,7 @@ agent generateRandomAgent(){
 }
 
 population init_population(){
-  printf("!");
+  printf("!\n");
   population pop;
   pop.agents = malloc(pop_size * sizeof(agent));
   for(int i = 0; i < pop_size; i++){
@@ -157,6 +157,7 @@ population new_population(population pop, int crossover_rate){
 }
 
 int main(int argc, char** argv) {
+  printf(getpid());
   population pop = init_population();
   for(int i= 0; i < num_epochs; i++){
     fitness(pop);
