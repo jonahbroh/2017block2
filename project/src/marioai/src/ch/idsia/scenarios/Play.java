@@ -36,7 +36,7 @@ public class Play {
         options.setLevelDifficulty(0);
         task.setOptions(options);
         if (args.length > 0 && args[0].equals("1")){
-          // options.setVisualization(false);
+          options.setVisualization(false);
           try{
             BufferedWriter bw = null;
   		      FileWriter fw = null;
