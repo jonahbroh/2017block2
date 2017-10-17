@@ -112,22 +112,14 @@ public class MarioComponent extends JComponent implements Runnable, /*KeyListene
         running = true;
         adjustFPS();
         EvaluationInfo evaluationInfo = new EvaluationInfo();
-        VolatileImage image = null;
-        Graphics g = null;
-        Graphics og = null;
         GraphicsEnvironment ge =
         GraphicsEnvironment.getLocalGraphicsEnvironment();
         boolean headless_check = ge.isHeadless();
         if(!headless_check){
-          image = createVolatileImage(320, 240);
-          g = getGraphics();
-          og = image.getGraphics();
         }
 
         if (!GlobalOptions.VisualizationOn) {
             String msgClick = "Vizualization is not available";
-            drawString(og, msgClick, 160 - msgClick.length() * 4, 110, 1);
-            drawString(og, msgClick, 160 - msgClick.length() * 4, 110, 7);
         }
 
         addFocusListener(this);
@@ -153,8 +145,6 @@ public class MarioComponent extends JComponent implements Runnable, /*KeyListene
 
 //            og.setColor(Color.RED);
             if (GlobalOptions.VisualizationOn) {
-                og.fillRect(0, 0, 320, 240);
-                scene.render(og, alpha);
             }
 
             if (agent instanceof ServerAgent && !((ServerAgent) agent).isAvailable()) {
@@ -184,53 +174,10 @@ public class MarioComponent extends JComponent implements Runnable, /*KeyListene
 //            scene.keys = action;
             ((LevelScene) scene).mario.keys = action;
             ((LevelScene) scene).mario.cheatKeys = cheatAgent.getAction(null);
-
-            if (GlobalOptions.VisualizationOn) {
-
-                String msg = "Agent: " + agent.getName();
-                LevelScene.drawStringDropShadow(og, msg, 0, 7, 5);
-
-                msg = "Selected Actions: ";
-                LevelScene.drawStringDropShadow(og, msg, 0, 8, 6);
-
-                msg = "";
-                if (action != null)
-                {
-                    for (int i = 0; i < Environment.numberOfButtons; ++i)
-                        msg += (action[i]) ? scene.keysStr[i] : "      ";
-                }
-                else
-                    msg = "NULL";
-                drawString(og, msg, 6, 78, 1);
-
-                if (!this.hasFocus() && tick / 4 % 2 == 0) {
-                    String msgClick = "CLICK TO PLAY";
-//                    og.setColor(Color.YELLOW);
-//                    og.drawString(msgClick, 320 + 1, 20 + 1);
-                    drawString(og, msgClick, 160 - msgClick.length() * 4, 110, 1);
-                    drawString(og, msgClick, 160 - msgClick.length() * 4, 110, 7);
-                }
-                og.setColor(Color.DARK_GRAY);
-                LevelScene.drawStringDropShadow(og, "FPS: ", 33, 2, 7);
-                LevelScene.drawStringDropShadow(og, ((GlobalOptions.FPS > 99) ? "\\infty" : GlobalOptions.FPS.toString()), 33, 3, 7);
-
-                msg = totalNumberOfTrials == -2 ? "" : currentTrial + "(" + ((totalNumberOfTrials == -1) ? "\\infty" : totalNumberOfTrials) + ")";
-
-                LevelScene.drawStringDropShadow(og, "Trial:", 33, 4, 7);
-                LevelScene.drawStringDropShadow(og, msg, 33, 5, 7);
-
-
-                if (width != 320 || height != 240) {
-                        g.drawImage(image, 0, 0, 640 * 2, 480 * 2, null);
-                } else {
-                    g.drawImage(image, 0, 0, null);
-                }
-            } else {
                 // Win or Die without renderer!! independently.
                 marioStatus = ((LevelScene) scene).mario.getStatus();
                 if (marioStatus != Mario.STATUS_RUNNING)
                     stop();
-            }
             // Delay depending on how far we are behind.
             if (delay > 0)
                 try {
