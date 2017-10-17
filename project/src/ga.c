@@ -52,6 +52,7 @@ agent generateRandomAgent(){
 
 population init_population(){
   population pop;
+  printf("!");
   pop.agents = malloc(pop_size * sizeof(agent));
   for(int i = 0; i < pop_size; i++){
     pop.agents[i] = generateRandomAgent();
