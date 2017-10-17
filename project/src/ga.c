@@ -65,15 +65,17 @@ void fitness(population pop){
     pid_t parent = getpid();
     pid_t pid = fork();
     if (pid == -1){
-      printf("!!!");
+      printf("!\n");
     }
     else if (pid > 0){
+      printf("!!\n");
       int status;
       waitpid(pid, &status, 0);
     }
     else{
       execl(javapath, "-cp", gamepath, classname, "1", i, chromosome_string(pop.agents[i]));
       _exit(EXIT_FAILURE);
+      printf("!!!\n");
       FILE* fit;
       char fitpath[100];
       char* fitstr;
