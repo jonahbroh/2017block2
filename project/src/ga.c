@@ -118,9 +118,14 @@ int sum_fitness(population pop){
 }
 
 agent pickFitParent(population pop){
-  printf("???");
   int total_fitness = sum_fitness(pop);
-  int r = rand()%total_fitness;
+  int r;
+  if(total_fitness > 0){
+    r = rand()%total_fitness;
+  }
+  else{
+    r = 0;
+  }
   int ind = 0;
   for(int i = 0; r > 0; i++){
     ind = i;
