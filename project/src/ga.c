@@ -149,6 +149,7 @@ population new_population(population pop, int crossover_rate){
 }
 
 int main(int argc, char** argv) {
+  printf("?????");
   population pop = init_population();
   printf("?");
   for(int i= 0; i < num_epochs; i++){
