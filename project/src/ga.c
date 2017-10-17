@@ -157,7 +157,7 @@ population new_population(population pop, int crossover_rate){
 }
 
 int main(int argc, char** argv) {
-  printf(ltoa(getpid()));
+  printf("%d", getpid());
   population pop = init_population();
   for(int i= 0; i < num_epochs; i++){
     fitness(pop);
