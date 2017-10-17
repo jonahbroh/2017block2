@@ -64,8 +64,11 @@ void fitness(population pop){
   for(int i = 0; i < pop_size; i++){
     pid_t parent = getpid();
     pid_t pid = fork();
-    if (pid > 0){
-      printf("!!\n");
+    if (pid == -1){
+      printf("!\n");
+    }
+    else if (pid > 0){
+      printf("parent\n");
       int status;
       waitpid(pid, &status, 0);
       FILE* fit;
@@ -77,10 +80,10 @@ void fitness(population pop){
       pop.agents[i].fitness = atoi(fitstr);
     }
     else{
-      printf("child");
-      exit(1);
+      printf("child\n");
+      execl(javapath, "java", "-cp", gamepath, classname, "1", i, chromosome_string(pop.agents[i]));
+      _exit(EXIT_FAILURE);
     }
-
 
   }
   sort_fitness(pop);
@@ -154,11 +157,6 @@ population new_population(population pop, int crossover_rate){
 }
 
 int main(int argc, char** argv) {
-  if(argc == 0){
-    execl(javapath, "java", "-cp", gamepath, classname, "1", i, chromosome_string(pop.agents[i]));
-    printf("!!!\n");
-    _exit(EXIT_FAILURE);
-  }
   population pop = init_population();
   for(int i= 0; i < num_epochs; i++){
     fitness(pop);
