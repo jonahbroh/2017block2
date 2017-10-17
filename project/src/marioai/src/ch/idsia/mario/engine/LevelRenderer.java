@@ -24,11 +24,14 @@ public class LevelRenderer
     {
         this.width = width;
         this.height = height;
-
         this.level = level;
-        image = graphicsConfiguration.createCompatibleImage(width, height, Transparency.BITMASK);
-        g = (Graphics2D) image.getGraphics();
-        g.setComposite(AlphaComposite.Src);
+        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+        boolean headless_check = ge.isHeadless();
+        if(!headless_check){
+          image = graphicsConfiguration.createCompatibleImage(width, height, Transparency.BITMASK);
+          g = (Graphics2D) image.getGraphics();
+          g.setComposite(AlphaComposite.Src);
+        }
 
         updateArea(0, 0, width, height);
     }
