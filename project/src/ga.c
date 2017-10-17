@@ -75,7 +75,7 @@ void fitness(population pop){
       _exit(EXIT_FAILURE);
       FILE* fit;
       char fitpath[100];
-      char fitstr[100];
+      char* fitstr;
       sprintf(fitpath, "%s%d", fitstr, i);
       fit = fopen(fitpath, "r");
       fitstr = fgets(fitstr, 100, fit);
