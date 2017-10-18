@@ -76,6 +76,7 @@ void fitness(population pop){
       char fitstr[1000];
       sprintf(fitpath, "%s%d.txt", fitdir, i);
       FILE *fit = fopen(fitpath, "r");
+      printf("%s\n", fitpath);
       fgets(fitstr, 1000, fit);
       pop.agents[i].fitness = atoi(fitstr);
     }
