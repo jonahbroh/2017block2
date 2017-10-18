@@ -166,9 +166,10 @@ population new_population(population pop, int crossover_rate){
 int main(int argc, char** argv) {
   population pop = init_population();
   for(int i= 0; i < num_epochs; i++){
-    fitness(pop);
     struct timespec start_time;
     struct timespec end_time;
+    clock_gettime(CLOCK_MONOTONIC,&start_time);
+    fitness(pop);
     clock_gettime(CLOCK_MONOTONIC,&end_time);
     long msec = (end_time.tv_sec - start_time.tv_sec)*1000 + (end_time.tv_nsec - start_time.tv_nsec)/1000000;
     printf("Generation %d, top fitness %d, %d msec\n", i, pop.agents[pop_size - 1].fitness, msec);
