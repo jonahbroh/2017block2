@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <sys/wait.h>
+#include <omp.h>
 
 char* javapath = "/modules/packages/jdk-9/bin/java";
 char* gamepath = "/home/nfs/j_broh/2017block2/project/src/marioai/classes";
