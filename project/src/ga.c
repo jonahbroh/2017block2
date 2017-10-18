@@ -73,7 +73,7 @@ void fitness(population pop){
       printf("child\n");
       char istr[5];
       sprintf(istr, "%d", i);
-      execl(javapath, javapath, "-cp", gamepath, classname, "1", istr, chromosome_string(pop.agents[i]));
+      // execl(javapath, javapath, "-cp", gamepath, classname, "1", istr, chromosome_string(pop.agents[i]));
       exit(0);
     }
     printf("parent\n");
@@ -82,6 +82,7 @@ void fitness(population pop){
     char* fitdir = "/home/nfs/j_broh/2017block2/project/src/marioai/scores/fitness";
     char fitstr[1000];
     sprintf(fitpath, "%s%d.txt", fitdir, i);
+    printf("%s\n", fitpath);
     FILE *fit = fopen(fitpath, "r");
     fgets(fitstr, 1000, fit);
     pop.agents[i].fitness = atoi(fitstr);
