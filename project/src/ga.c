@@ -76,7 +76,7 @@ void fitness(population pop){
       printf("%s\n", istr);
       execl(javapath, javapath, "-cp", gamepath, classname, "1", istr, chromosome_string(pop.agents[i]));
       printf("???\n");
-      exit(0);
+      _exit(0);
     }
     printf("parent\n");
     // waitpid(pid, NULL, 0);
@@ -175,6 +175,7 @@ population new_population(population pop, int crossover_rate){
 int main(int argc, char** argv) {
   population pop = init_population();
   for(int i= 0; i < num_epochs; i++){
+    printf("Generation %d\n", i);
     fitness(pop);
     if(pop.agents[0].fitness >= 4000){
       printf("Fitness: %d Generations: %d", pop.agents[0].fitness, i);
