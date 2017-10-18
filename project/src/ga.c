@@ -5,7 +5,8 @@
 #include <unistd.h>
 #include <sys/wait.h>
 
-char* javapath = "/home/nfs/j_broh/2017block2/project/src/marioai/classes";
+char* javapath = "/modules/packages/jdk-9/bin/java";
+char* gamepath = "/home/nfs/j_broh/2017block2/project/src/marioai/classes";
 char* classname = "ch.idsia.scenarios.Play";
 
 int pop_size = 10;
@@ -80,7 +81,7 @@ void fitness(population pop){
     }
     else{
       printf("child\n");
-      execl(javapath, "java", classname, "1", i, chromosome_string(pop.agents[i]));
+      execl(javapath, javapath, "-cp", gamepath, classname, "1", i, chromosome_string(pop.agents[i]));
       _exit(EXIT_FAILURE);
     }
 
