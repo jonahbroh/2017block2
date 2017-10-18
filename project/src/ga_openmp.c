@@ -63,7 +63,7 @@ population init_population(){
 
 void fitness(population pop){
   omp_lock_t lock;
-  #pragma omp parallel for
+  #pragma omp parallel for schedule(static)
   for(int i = 0; i < pop_size; i++){
     pid_t parent, pid;
     int status;
@@ -92,7 +92,6 @@ void fitness(population pop){
     omp_destroy_lock(&lock);
 
   }
-  #pragma omp taskwait
   sort_fitness(pop);
 }
 
