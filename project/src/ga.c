@@ -85,6 +85,7 @@ void fitness(population pop){
     printf("%s\n", fitpath);
     FILE *fit = fopen(fitpath, "r");
     fgets(fitstr, 1000, fit);
+    printf("%s\n", fitstr);
     pop.agents[i].fitness = atoi(fitstr);
 
   }
