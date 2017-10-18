@@ -11,6 +11,7 @@ int main(){
   char* fitdir = "./marioai/scores/fitness";
   char fitstr[1000];
   sprintf(fitpath, "%s%d", fitdir, 999);
+  printf(fitpath);
   FILE *fit = fopen(fitpath, "r");
   fgets(fitstr, 1000, fit);
   printf(fitstr);
