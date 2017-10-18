@@ -106,6 +106,7 @@ agent mutate(agent child, int mutation_rate){
 
 agent crossover(agent p1, agent p2){
   agent child;
+  child.chromosome = malloc(28 * sizeof(int));
   for(int i= 1; i < 28; i+=2){
     if(rand()%2 == 0){
       child.chromosome[i] = p1.chromosome[i];
