@@ -101,7 +101,6 @@ public class GAgent extends BasicAIAgent implements Agent
 		else{
 			status = 0;
 		}
-		System.out.println("state: " + state + " status: " + status);
 		return transitions[state][status];
 	}
 
@@ -109,7 +108,6 @@ public class GAgent extends BasicAIAgent implements Agent
 	public boolean[] getAction(Environment environment)
 	{
 		state = getState(environment);
-		System.out.println("!");
 		if(state == 0){
 			action[Mario.KEY_RIGHT] = true;
 			action[Mario.KEY_JUMP] = action[Mario.KEY_SPEED] = false;
