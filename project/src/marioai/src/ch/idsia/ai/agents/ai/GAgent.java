@@ -101,7 +101,7 @@ public class GAgent extends BasicAIAgent implements Agent
 		else{
 			status = 0;
 		}
-		System.out.println("state: " + state + " status: " + status);
+		// System.out.println("state: " + state + " status: " + status);
 		return transitions[state][status];
 	}
 
