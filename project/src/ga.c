@@ -160,7 +160,9 @@ population new_population(population pop, int crossover_rate){
     else{
       printf("not crossing\n");
       agent child = pickFitParent(pop);
+      printf("mutating\n");
       child = mutate(child, mutation_rate);
+      printf("done\n");
       new_pop.agents[i] = child;
     }
   }
