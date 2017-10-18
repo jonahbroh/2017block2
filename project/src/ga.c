@@ -146,6 +146,7 @@ agent pickFitParent(population pop){
 
 population new_population(population pop, int crossover_rate){
   population new_pop;
+  new_pop.agents = malloc(pop_size * sizeof(agent));
   for(int i= 0; i < pop_size; i++){
     int r = rand()%100;
     printf("%di\n", i);
