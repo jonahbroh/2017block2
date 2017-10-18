@@ -42,13 +42,10 @@ public class Play {
   		      FileWriter fw = null;
             String filename = "fitness" + args[1] + ".txt";
             File file = new File("/home/nfs/j_broh/2017block2/project/src/marioai/scores", filename);
-            System.out.println(file);
             if (!file.exists()){
               file.createNewFile();
             }
-            System.out.println("?");
   			    BufferedWriter writer = new BufferedWriter(new FileWriter(file.getAbsoluteFile()));
-            System.out.println("??");
             String score = Double.toString(task.evaluate(controller)[0]);
             System.out.println(score);
             writer.write(score);
