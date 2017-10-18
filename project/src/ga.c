@@ -140,7 +140,6 @@ agent pickFitParent(population pop){
     ind = i;
     r -= pop.agents[i].fitness;
   }
-  printf("%d\n", ind);
   return pop.agents[ind];
 }
 
@@ -155,7 +154,9 @@ population new_population(population pop, int crossover_rate){
       agent p1 = pickFitParent(pop);
       agent p2 = pickFitParent(pop);
       agent child = crossover(p1, p2);
+      printf("cmutating\n");
       child = mutate(child, mutation_rate);
+      printf("cdone\n");
       new_pop.agents[i] = child;
     }
     else{
