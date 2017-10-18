@@ -78,12 +78,12 @@ void fitness(population pop){
     }
     printf("parent\n");
     wpid = wait(&status);
+    wait();
     char fitpath[100];
     char* fitdir = "/home/nfs/j_broh/2017block2/project/src/marioai/scores/fitness";
     char fitstr[1000];
     sprintf(fitpath, "%s%d.txt", fitdir, i);
     FILE *fit = fopen(fitpath, "r");
-    printf("%s\n", fitpath);
     fgets(fitstr, 1000, fit);
     pop.agents[i].fitness = atoi(fitstr);
 
