@@ -140,7 +140,9 @@ agent pickFitParent(population pop){
   for(int i = 0; r > 0 && i < pop_size; i++){
     printf("%d%d\n", i, r);
     ind = i;
-    r -= pop.agents[i].fitness;
+    if(r >= pop.agents[i].fitness){
+      r -= pop.agents[i].fitness;
+    }
   }
   return pop.agents[ind];
 }
