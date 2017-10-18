@@ -65,7 +65,7 @@ void fitness(population pop){
   for(int i = 0; i < pop_size; i++){
     int status;
     parent = getpid();
-    pid = fork();
+    pid = vfork();
     if (pid == -1){
       printf("!\n");
     }
