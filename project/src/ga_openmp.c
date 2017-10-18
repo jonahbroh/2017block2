@@ -81,8 +81,8 @@ void fitness(population pop){
       execl(javapath, javapath, "-cp", gamepath, classname, "1", istr, chromosome_string(pop.agents[i]), (char*)NULL);
       _exit(0);
     }
-    // waitpid(pid, NULL, 0);
-    wait(NULL);
+    waitpid(pid, NULL, 0);
+    // wait(NULL);
     omp_init_lock(&lock);
     char fitpath[100];
     char* fitdir = "/home/nfs/j_broh/2017block2/project/src/marioai/scores/fitness";
