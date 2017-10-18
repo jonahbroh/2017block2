@@ -61,7 +61,7 @@ population init_population(){
 }
 
 void fitness(population pop){
-  #pragma omp parallel for
+  #pragma omp parallel for firstprivate(i)
   for(int i = 0; i < pop_size; i++){
     pid_t parent, pid;
     int status;
