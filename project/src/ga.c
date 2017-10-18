@@ -146,7 +146,9 @@ population new_population(population pop, int crossover_rate){
   population new_pop;
   for(int i= 0; i < pop_size; i++){
     int r = rand()%100;
+    printf("%di\n", i);
     if(r < crossover_rate){
+      printf("crossing over\n");
       agent p1 = pickFitParent(pop);
       agent p2 = pickFitParent(pop);
       agent child = crossover(p1, p2);
@@ -166,7 +168,7 @@ int main(int argc, char** argv) {
   population pop = init_population();
   for(int i= 0; i < num_epochs; i++){
     fitness(pop);
-    if(pop.agents[0].fitness >= 4416){
+    if(pop.agents[0].fitness >= 4000){
       printf("Fitness: %d Generations: %d", pop.agents[0].fitness, i);
       return i;
     }
