@@ -46,7 +46,7 @@ agent generateRandomAgent(){
   for(int i = 0; i < 28; i++){
     a.chromosome[i] = rand()%4;
   }
-  a.fitness = 0;
+  a.fitness = -1;
   return a;
 }
 
@@ -78,17 +78,14 @@ void fitness(population pop){
     }
     // waitpid(pid, NULL, 0);
     wait(NULL);
-    #pragma omp critical
-    {
-      char fitpath[100];
-      char* fitdir = "/home/nfs/j_broh/2017block2/project/src/marioai/scores/fitness";
-      char fitstr[1000];
-      sprintf(fitpath, "%s%d.txt", fitdir, i);
-      FILE *fit = fopen(fitpath, "r");
-      fgets(fitstr, 1000, fit);
-      printf("%d %s\n", i, fitstr);
-      pop.agents[i].fitness = atoi(fitstr);
-    }
+    char fitpath[100];
+    char* fitdir = "/home/nfs/j_broh/2017block2/project/src/marioai/scores/fitness";
+    char fitstr[1000];
+    sprintf(fitpath, "%s%d.txt", fitdir, i);
+    FILE *fit = fopen(fitpath, "r");
+    fgets(fitstr, 1000, fit);
+    printf("%d %s\n", i, fitstr);
+    pop.agents[i].fitness = atoi(fitstr);
 
   }
   #pragma omp taskwait
