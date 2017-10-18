@@ -152,7 +152,7 @@ public class ParameterContainer
         try
         {
             if (AgentsPool.getAgentByName(a.getName()) == null)
-                AgentsPool.addAgent(a);
+                AgentsPool.addAgent(a, "a");
             return a.getName();
         }catch(NullPointerException e)
         {
@@ -200,7 +200,7 @@ public class ParameterContainer
             defaultOptionsHashMap.put("-ssiw","off"); //defaultOptionsHashMap.put("-stopSimulationIfWin","off");
             defaultOptionsHashMap.put("-server","off");
             defaultOptionsHashMap.put("-t","on"); //defaultOptionsHashMap.put("-timer","on");
-            defaultOptionsHashMap.put("-tl","200"); //defaultOptionsHashMap.put("-timer","on");
+            defaultOptionsHashMap.put("-tl","10"); //defaultOptionsHashMap.put("-timer","on");
             defaultOptionsHashMap.put("-tc","off"); //defaultOptionsHashMap.put("-toolsConfigurator","off");
             defaultOptionsHashMap.put("-vaot","off"); //defaultOptionsHashMap.put("-viewAlwaysOnTop","off");
             defaultOptionsHashMap.put("-vlx","0"); //defaultOptionsHashMap.put("-viewLocationX","0");
