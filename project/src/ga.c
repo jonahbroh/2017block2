@@ -77,7 +77,7 @@ void fitness(population pop){
       exit(0);
     }
     printf("parent\n");
-    wait(NULL);
+    waitpid(pid, NULL, 0);
     char fitpath[100];
     char* fitdir = "/home/nfs/j_broh/2017block2/project/src/marioai/scores/fitness";
     char fitstr[1000];
