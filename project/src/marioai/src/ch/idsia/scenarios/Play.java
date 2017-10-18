@@ -49,7 +49,7 @@ public class Play {
             Double d = new Double(task.evaluate(controller)[0]);
             int i = d.intValue();
             String score = Integer.toString(i);
-            System.out.println(score);
+            // System.out.println(score);
             writer.write(score);
             writer.close();
             System.exit(0);

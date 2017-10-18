@@ -167,6 +167,8 @@ int main(int argc, char** argv) {
   population pop = init_population();
   for(int i= 0; i < num_epochs; i++){
     fitness(pop);
+    struct timespec start_time;
+    struct timespec end_time;
     clock_gettime(CLOCK_MONOTONIC,&start_time);
     fitness(pop);
     checkfits(pop);
