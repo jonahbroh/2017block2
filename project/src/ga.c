@@ -81,7 +81,7 @@ void fitness(population pop){
     }
     else{
       printf("child\n");
-      char* istr[5];
+      char istr[5];
       sprintf(istr, "%d", i);
       execl(javapath, javapath, "-cp", gamepath, classname, "1", istr, chromosome_string(pop.agents[i]));
       _exit(EXIT_FAILURE);
