@@ -33,7 +33,7 @@ public class Play {
         options.setNumberOfTrials(1);
         options.setMatlabFileName("");
         options.setLevelRandSeed(0);
-        options.setLevelDifficulty(3);
+        options.setLevelDifficulty(2);
         task.setOptions(options);
         if (args.length > 0 && args[0].equals("1")){
           options.setVisualization(false);
