@@ -41,7 +41,7 @@ public class Play {
             BufferedWriter bw = null;
   		      FileWriter fw = null;
             String filename = "fitness" + args[1] + ".txt";
-            File file = new File("scores", filename);
+            File file = new File("/home/nfs/j_broh/2017block2/project/src/marioai/scores", filename);
             System.out.println(file);
             if (!file.exists()){
               file.createNewFile();
