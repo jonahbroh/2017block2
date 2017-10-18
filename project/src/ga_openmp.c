@@ -12,7 +12,7 @@ char* javapath = "/modules/packages/jdk-9/bin/java";
 char* gamepath = "/home/nfs/j_broh/2017block2/project/src/marioai/classes";
 char* classname = "ch.idsia.scenarios.Play";
 
-int pop_size = 10;
+int pop_size = 20;
 int mutation_rate = 10;
 int crossover_rate = 80;
 int num_epochs = 500;
