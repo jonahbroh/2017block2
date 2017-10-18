@@ -61,6 +61,7 @@ population init_population(){
 }
 
 void fitness(population pop){
+  omp_lock_t lock;
   #pragma omp parallel for
   for(int i = 0; i < pop_size; i++){
     pid_t parent, pid;
@@ -78,6 +79,7 @@ void fitness(population pop){
     }
     // waitpid(pid, NULL, 0);
     wait(NULL);
+    omp_init_lock(&lock);
     char fitpath[100];
     char* fitdir = "/home/nfs/j_broh/2017block2/project/src/marioai/scores/fitness";
     char fitstr[1000];
@@ -86,6 +88,7 @@ void fitness(population pop){
     fgets(fitstr, 1000, fit);
     printf("%d %s\n", i, fitstr);
     pop.agents[i].fitness = atoi(fitstr);
+    omp_destroy_lock(&lock);
 
   }
   #pragma omp taskwait
