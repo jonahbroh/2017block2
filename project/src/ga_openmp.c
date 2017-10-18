@@ -160,10 +160,17 @@ population new_population(population pop, int crossover_rate){
   return new_pop;
 }
 
+void checkfits(population pop){
+  for(int i = 0; i < pop_size; i++){
+    printf("%d %d\n", i, pop.agents[i].fitness);
+  }
+}
+
 int main(int argc, char** argv) {
   population pop = init_population();
   for(int i= 0; i < num_epochs; i++){
     fitness(pop);
+    checkfits(pop);
     printf("Generation %d, top fitness %d\n", i, pop.agents[pop_size - 1].fitness);
     if(pop.agents[pop_size - 1].fitness >= 4000){
       printf("Fitness: %d Generations: %d Chromosome: %s", pop.agents[pop_size - 1].fitness, i, chromosome_string(pop.agents[pop_size - 1]));
