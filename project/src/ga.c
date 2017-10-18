@@ -61,11 +61,11 @@ population init_population(){
 }
 
 void fitness(population pop){
+  pid_t parent, pid;
   for(int i = 0; i < pop_size; i++){
-    pid_t wpid;
     int status;
-    pid_t parent = getpid();
-    pid_t pid = fork();
+    parent = getpid();
+    pid = fork();
     if (pid == -1){
       printf("!\n");
     }
