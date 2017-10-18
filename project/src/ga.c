@@ -69,25 +69,23 @@ void fitness(population pop){
     if (pid == -1){
       printf("!\n");
     }
-    else if (pid > 0){
-      printf("parent\n");
-      wpid = wait(&status);
-      char fitpath[100];
-      char* fitdir = "/home/nfs/j_broh/2017block2/project/src/marioai/scores/fitness";
-      char fitstr[1000];
-      sprintf(fitpath, "%s%d.txt", fitdir, i);
-      FILE *fit = fopen(fitpath, "r");
-      printf("%s\n", fitpath);
-      fgets(fitstr, 1000, fit);
-      pop.agents[i].fitness = atoi(fitstr);
-    }
-    else{
+    else if (pid == 0){
       printf("child\n");
       char istr[5];
       sprintf(istr, "%d", i);
       execl(javapath, javapath, "-cp", gamepath, classname, "1", istr, chromosome_string(pop.agents[i]));
-      _exit(EXIT_FAILURE);
+      exit(0);
     }
+    printf("parent\n");
+    wpid = wait(&status);
+    char fitpath[100];
+    char* fitdir = "/home/nfs/j_broh/2017block2/project/src/marioai/scores/fitness";
+    char fitstr[1000];
+    sprintf(fitpath, "%s%d.txt", fitdir, i);
+    FILE *fit = fopen(fitpath, "r");
+    printf("%s\n", fitpath);
+    fgets(fitstr, 1000, fit);
+    pop.agents[i].fitness = atoi(fitstr);
 
   }
   sort_fitness(pop);
