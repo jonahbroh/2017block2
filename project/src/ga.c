@@ -147,6 +147,7 @@ agent pickFitParent(population pop){
       r = 0;
     }
   }
+  printf("???\n");
   return pop.agents[ind];
 }
 
