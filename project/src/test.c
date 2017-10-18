@@ -7,5 +7,13 @@ int main(){
   char* javapath = "/modules/packages/jdk-9/bin/java";
   char* gamepath = "/home/nfs/j_broh/2017block2/project/src/marioai/classes";
   char* classname = "ch.idsia.scenarios.Play";
-  execl(javapath, javapath, "-cp", gamepath, classname, "1", "999", "1111111222222233333330000000");
+  char fitpath[100];
+  char* fitdir = "./marioai/scores/fitness";
+  char fitstr[100];
+  sprintf(fitpath, "%s%d", fitdirr, 999);
+  fit = fopen(fitpath, "r");
+  fgets(fitstr, 100, fit);
+  printf(fitstr);
+
+  // execl(javapath, javapath, "-cp", gamepath, classname, "1", "999", "1111111222222233333330000000");
 }
