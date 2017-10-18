@@ -46,7 +46,9 @@ public class Play {
             if (!file.exists()){
               file.createNewFile();
             }
+            System.out.println("?");
   			    BufferedWriter writer = new BufferedWriter(new FileWriter(file.getAbsoluteFile()));
+            System.out.println("??");
             String score = Double.toString(task.evaluate(controller)[0]);
             System.out.println(score);
             writer.write(score);
