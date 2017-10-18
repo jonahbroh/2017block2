@@ -62,6 +62,8 @@ population init_population(){
 
 void fitness(population pop){
   for(int i = 0; i < pop_size; i++){
+    pid_t wpid;
+    int status;
     pid_t parent = getpid();
     pid_t pid = fork();
     if (pid == -1){
@@ -69,8 +71,7 @@ void fitness(population pop){
     }
     else if (pid > 0){
       printf("parent\n");
-      int status;
-      waitpid(pid, &status, 0);
+      wpid = wait(&status);
       char fitpath[100];
       char* fitdir = "/home/nfs/j_broh/2017block2/project/src/marioai/scores/fitness";
       char fitstr[1000];
