@@ -73,7 +73,7 @@ void fitness(population pop){
       waitpid(pid, &status, 0);
       FILE* fit;
       char fitpath[100];
-      char* fitstr;
+      char* fitstr = "./marioai/scores/fitness";
       sprintf(fitpath, "%s%d", fitstr, i);
       fit = fopen(fitpath, "r");
       fitstr = fgets(fitstr, 100, fit);
