@@ -61,7 +61,7 @@ population init_population(){
 }
 
 void fitness(population pop){
-  #pragma omp parallel for firstprivate(i)
+  #pragma omp parallel for
   for(int i = 0; i < pop_size; i++){
     pid_t parent, pid;
     int status;
@@ -78,14 +78,16 @@ void fitness(population pop){
     }
     // waitpid(pid, NULL, 0);
     wait(NULL);
-    char fitpath[100];
-    char* fitdir = "/home/nfs/j_broh/2017block2/project/src/marioai/scores/fitness";
-    char fitstr[1000];
-    sprintf(fitpath, "%s%d.txt", fitdir, i);
-    FILE *fit = fopen(fitpath, "r");
-    fgets(fitstr, 1000, fit);
-    printf("%d %s\n", i, fitstr);
-    pop.agents[i].fitness = atoi(fitstr);
+    #pragma omp critical{
+      char fitpath[100];
+      char* fitdir = "/home/nfs/j_broh/2017block2/project/src/marioai/scores/fitness";
+      char fitstr[1000];
+      sprintf(fitpath, "%s%d.txt", fitdir, i);
+      FILE *fit = fopen(fitpath, "r");
+      fgets(fitstr, 1000, fit);
+      printf("%d %s\n", i, fitstr);
+      pop.agents[i].fitness = atoi(fitstr);
+    }
 
   }
   #pragma omp taskwait
