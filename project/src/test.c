@@ -8,7 +8,7 @@ int main(){
   char* gamepath = "/home/nfs/j_broh/2017block2/project/src/marioai/classes";
   char* classname = "ch.idsia.scenarios.Play";
   char fitpath[100];
-  char* fitdir = "./marioai/scores/fitness";
+  char* fitdir = "/home/nfs/j_broh/2017block2/project/src/marioai/scores/fitness";
   char fitstr[1000];
   sprintf(fitpath, "%s%d", fitdir, 999);
   printf("%s\n", fitpath);
