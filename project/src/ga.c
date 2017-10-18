@@ -143,6 +143,9 @@ agent pickFitParent(population pop){
     if(r >= pop.agents[i].fitness){
       r -= pop.agents[i].fitness;
     }
+    else{
+      r = 0;
+    }
   }
   return pop.agents[ind];
 }
