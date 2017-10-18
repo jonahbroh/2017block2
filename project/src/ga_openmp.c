@@ -165,12 +165,12 @@ int main(int argc, char** argv) {
   for(int i= 0; i < num_epochs; i++){
     fitness(pop);
     printf("Generation %d, top fitness %d\n", i, pop.agents[pop_size - 1].fitness);
-    if(pop.agents[pop_size - 1].fitness >= 4000){
-      printf("Fitness: %d Generations: %d", pop.agents[pop_size - 1].fitness, i);
+    if(pop.agents[pop_size - 1].fitness >= 6000){
+      printf("Fitness: %d Generations: %d Chromosome: %s", pop.agents[pop_size - 1].fitness, i, chromosome_string(pop.agents[pop_size - 1]));
       return i;
     }
     pop = new_population(pop, crossover_rate);
   }
-  printf("Fitness: %d Generations: %d", pop.agents[pop_size - 1].fitness, 500);
+  printf("Fitness: %d Generations: %d Chromosome: %s", pop.agents[pop_size - 1].fitness, 500, chromosome_string(pop.agents[pop_size - 1]));
   return 500;
 }
