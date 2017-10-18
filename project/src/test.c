@@ -7,6 +7,7 @@ int main(){
   char* javapath = "/modules/packages/jdk-9/bin/java";
   char* gamepath = "/home/nfs/j_broh/2017block2/project/src/marioai/classes";
   char* classname = "ch.idsia.scenarios.Play";
+  FILE* fit;
   char fitpath[100];
   char* fitdir = "./marioai/scores/fitness";
   char fitstr[100];
