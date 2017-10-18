@@ -16,7 +16,7 @@ public class GAgent extends BasicAIAgent implements Agent
 	{
 		super("GAgent");
 		reset();
-		System.out.println(chromosome);
+		// System.out.println(chromosome);
 		for(int i = 0; i < 7; i++){
 			transitions[0][i] = Character.getNumericValue(chromosome.charAt(i));
 		}

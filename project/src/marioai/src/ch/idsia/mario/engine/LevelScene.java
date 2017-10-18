@@ -124,7 +124,7 @@ public class LevelScene extends Scene implements SpriteContext
                         return 16; // prevents cheating
                     case 21:       // question brick, contains coin
                     case 22:       // question brick, contains flower/mushroom
-                        return 21; // question brick, contains something                    
+                        return 21; // question brick, contains something
                     case(-108):
                     case(-107):
                     case(-106):
@@ -150,7 +150,7 @@ public class LevelScene extends Scene implements SpriteContext
                     case(-104):
                     case(-103):
                     case(-102):
-                    case(-101):                        
+                    case(-101):
                     case(-100):
                     case(-99):
                     case(-98):
@@ -180,7 +180,7 @@ public class LevelScene extends Scene implements SpriteContext
                     case(14): case(30): case(46): // canon
                         return 20;  // angry flower pot or cannon
                 }
-                System.err.println("Unknown value el = " + el + " ; Please, inform the developers");
+                // System.err.println("Unknown value el = " + el + " ; Please, inform the developers");
                 return el;
             case(2):
                 switch(el)
@@ -196,7 +196,7 @@ public class LevelScene extends Scene implements SpriteContext
                 }
                 return 1;  // everything else is "something", so it is 1
         }
-        System.err.println("Unkown ZLevel Z" + ZLevel);
+        // System.err.println("Unkown ZLevel Z" + ZLevel);
         return el; //TODO: Throw unknown ZLevel exception
     }
 
@@ -209,7 +209,7 @@ public class LevelScene extends Scene implements SpriteContext
                 switch(el)
                 {
                     // cancell irrelevant sprite codes
-                    case(Sprite.KIND_COIN_ANIM): 
+                    case(Sprite.KIND_COIN_ANIM):
                     case(Sprite.KIND_PARTICLE):
                     case(Sprite.KIND_SPARCLE):
                     case(Sprite.KIND_MARIO):
@@ -225,7 +225,7 @@ public class LevelScene extends Scene implements SpriteContext
                     case(Sprite.KIND_MARIO):
                         return Sprite.KIND_NONE;
                     case(Sprite.KIND_FIREBALL):
-                        return Sprite.KIND_FIREBALL;                    
+                        return Sprite.KIND_FIREBALL;
                     case(Sprite.KIND_BULLET_BILL):
                     case(Sprite.KIND_GOOMBA):
                     case(Sprite.KIND_GOOMBA_WINGED):
@@ -680,7 +680,7 @@ public class LevelScene extends Scene implements SpriteContext
          {
          recorder.addTick(mario.getKeyMask());
          }
-         
+
          if (replayer!=null)
          {
          mario.setKeys(replayer.nextTick());

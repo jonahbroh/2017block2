@@ -61,9 +61,9 @@ population init_population(){
 }
 
 void fitness(population pop){
-  pid_t parent, pid;
   #pragma omp parallel for
   for(int i = 0; i < pop_size; i++){
+    pid_t parent, pid;
     int status;
     parent = getpid();
     pid = vfork();
