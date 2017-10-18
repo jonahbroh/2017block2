@@ -1,7 +1,6 @@
 #include <stdio.h>
 int main()
 {
-  str[100] FILE_NAME;
   for(int i = 0; i < 100; i++){
     char fitpath[100];
     char* fitdir = "/home/nfs/j_broh/2017block2/project/src/marioai/scores/fitness";
