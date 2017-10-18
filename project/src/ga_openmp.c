@@ -5,6 +5,8 @@
 #include <unistd.h>
 #include <sys/wait.h>
 #include <omp.h>
+#include <time.h>
+
 
 char* javapath = "/modules/packages/jdk-9/bin/java";
 char* gamepath = "/home/nfs/j_broh/2017block2/project/src/marioai/classes";
@@ -41,6 +43,7 @@ char* chromosome_string(agent a){
   }
   return chrom;
 }
+
 agent generateRandomAgent(){
   agent a;
   a.chromosome = malloc(28 * sizeof(int));
@@ -172,6 +175,7 @@ void checkfits(population pop){
 
 int main(int argc, char** argv) {
   population pop = init_population();
+  checkfits(pop);
   for(int i= 0; i < num_epochs; i++){
     struct timespec start_time;
     struct timespec end_time;
