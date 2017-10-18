@@ -78,7 +78,8 @@ void fitness(population pop){
     }
     // waitpid(pid, NULL, 0);
     wait(NULL);
-    #pragma omp critical{
+    #pragma omp critical
+    {
       char fitpath[100];
       char* fitdir = "/home/nfs/j_broh/2017block2/project/src/marioai/scores/fitness";
       char fitstr[1000];
