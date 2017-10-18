@@ -61,7 +61,7 @@ population init_population(){
 }
 
 void fitness(population pop){
-  #pragma omp for
+  #pragma omp parallel for
   for(int i = 0; i < pop_size; i++){
     pid_t parent, pid;
     int status;
@@ -88,6 +88,7 @@ void fitness(population pop){
     pop.agents[i].fitness = atoi(fitstr);
 
   }
+  #pragma omp taskwait
   sort_fitness(pop);
 }
 
