@@ -123,7 +123,6 @@ int sum_fitness(population pop){
 }
 
 agent pickFitParent(population pop){
-  printf("?\n");
   int total_fitness = sum_fitness(pop);
   int r;
   if(total_fitness > 0){
@@ -132,9 +131,9 @@ agent pickFitParent(population pop){
   else{
     r = 0;
   }
-  int ind = 0;
+  int ind = pop_size;
   for(int i = 0; r > 0 && i < pop_size; i++){
-    ind = i;
+    ind--;
     r -= pop.agents[i].fitness;
   }
   return pop.agents[ind];
@@ -145,7 +144,6 @@ population new_population(population pop, int crossover_rate){
   new_pop.agents = malloc(pop_size * sizeof(agent));
   for(int i= 0; i < pop_size; i++){
     int r = rand()%100;
-    printf("%di\n", i);
     if(r < crossover_rate){
       agent p1 = pickFitParent(pop);
       agent p2 = pickFitParent(pop);
@@ -166,13 +164,13 @@ int main(int argc, char** argv) {
   population pop = init_population();
   for(int i= 0; i < num_epochs; i++){
     fitness(pop);
-    printf("Generation %d, top fitness %d\n", i, pop.agents[0].fitness);
-    if(pop.agents[0].fitness >= 4000){
-      printf("Fitness: %d Generations: %d", pop.agents[0].fitness, i);
+    printf("Generation %d, top fitness %d\n", i, pop.agents[pop_size - 1].fitness);
+    if(pop.agents[pop_size - 1].fitness >= 4000){
+      printf("Fitness: %d Generations: %d", pop.agents[pop_size - 1].fitness, i);
       return i;
     }
     pop = new_population(pop, crossover_rate);
   }
-  printf("Fitness: %d Generations: %d", pop.agents[0].fitness, 500);
+  printf("Fitness: %d Generations: %d", pop.agents[pop_size - 1].fitness, 500);
   return 500;
 }
